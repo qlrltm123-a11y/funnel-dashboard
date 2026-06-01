@@ -110,7 +110,7 @@ main{padding:20px 28px;max-width:1600px;margin:0 auto}
 .trend-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(480px,1fr));gap:14px;margin-bottom:28px}
 .trend-card{background:#13131c;border:1px solid #1e1e2e;border-radius:14px;padding:18px 20px}
 .trend-card .tc-title{font-size:13px;font-weight:700;color:#c4b5fd;margin-bottom:14px}
-.chart-wrap{position:relative;height:210px}
+.chart-wrap{position:relative;height:250px}
 
 /* ═══════════════════════════════════
    COMPARE (grouped bar charts)
@@ -307,7 +307,7 @@ function buildPanelHTML(brand) {
       <div class="delta-grid" id="dcards-${brand}"></div>
     </div>
     <div id="inner-${brand}-trend" style="display:none">
-      <div class="sec-label">일별 전환율 추이 · 실선=262Q 점선=261Q</div>
+      <div class="sec-label">일별 추이 · 막대=건수(우) 선=전환율(좌) · 실선 262Q 점선 261Q</div>
       <div class="trend-grid" id="trend-${brand}"></div>
     </div>
     <div id="inner-${brand}-compare" style="display:none">
@@ -449,23 +449,33 @@ function renderTrendCharts(brand, data, prods) {
     const labels = (d262.length>=d261.length?d262:d261).map(r=>r.date);
     const pad = (arr,len) => { const a=[...arr]; while(a.length<len) a.push(null); return a; };
     charts[id] = new Chart(document.getElementById(id),{
-      type:'line',
       data:{ labels, datasets:[
-        {label:'262Q 장바구니',data:pad(d262.map(r=>r.cartRate),labels.length),borderColor:C262.cart,backgroundColor:C262.cart+'18',borderWidth:2,pointRadius:3,tension:.35,fill:true},
-        {label:'262Q 구매',    data:pad(d262.map(r=>r.buyRate), labels.length),borderColor:C262.buy, backgroundColor:'transparent',borderWidth:2,pointRadius:3,tension:.35,fill:false},
-        {label:'261Q 장바구니',data:pad(d261.map(r=>r.cartRate),labels.length),borderColor:C261.cart,backgroundColor:'transparent',borderWidth:1.5,borderDash:[4,4],pointRadius:2,tension:.35,fill:false},
-        {label:'261Q 구매',    data:pad(d261.map(r=>r.buyRate), labels.length),borderColor:C261.buy, backgroundColor:'transparent',borderWidth:1.5,borderDash:[4,4],pointRadius:2,tension:.35,fill:false},
+        // 건수 막대 (우측 축)
+        {type:'bar',label:'262Q 장바구니수',data:pad(d262.map(r=>r.cart),labels.length),backgroundColor:C262.cart+'40',yAxisID:'count',borderRadius:3,barPercentage:.6,order:3},
+        {type:'bar',label:'262Q 구매수',    data:pad(d262.map(r=>r.buy), labels.length),backgroundColor:C262.buy+'40',yAxisID:'count',borderRadius:3,barPercentage:.6,order:3},
+        // 전환율 선 (좌측 축)
+        {type:'line',label:'262Q 장바구니율',data:pad(d262.map(r=>r.cartRate),labels.length),borderColor:C262.cart,backgroundColor:'transparent',borderWidth:2,pointRadius:3,tension:.35,yAxisID:'rate',order:1},
+        {type:'line',label:'262Q 구매율',    data:pad(d262.map(r=>r.buyRate), labels.length),borderColor:C262.buy, backgroundColor:'transparent',borderWidth:2,pointRadius:3,tension:.35,yAxisID:'rate',order:1},
+        {type:'line',label:'261Q 장바구니율',data:pad(d261.map(r=>r.cartRate),labels.length),borderColor:C261.cart,backgroundColor:'transparent',borderWidth:1.5,borderDash:[4,4],pointRadius:2,tension:.35,yAxisID:'rate',order:2},
+        {type:'line',label:'261Q 구매율',    data:pad(d261.map(r=>r.buyRate), labels.length),borderColor:C261.buy, backgroundColor:'transparent',borderWidth:1.5,borderDash:[4,4],pointRadius:2,tension:.35,yAxisID:'rate',order:2},
       ]},
       options:{
         responsive:true,maintainAspectRatio:false,
         interaction:{mode:'index',intersect:false},
         plugins:{
-          legend:{labels:{color:'#666',font:{size:10},boxWidth:12,padding:8}},
-          tooltip:{callbacks:{label:c=>`${c.dataset.label}: ${c.parsed.y!==null?c.parsed.y.toFixed(2)+'%':'-'}`}}
+          legend:{labels:{color:'#666',font:{size:10},boxWidth:12,padding:7}},
+          tooltip:{callbacks:{label:c=>{
+            const v=c.parsed.y;
+            if(v===null) return `${c.dataset.label}: -`;
+            return c.dataset.yAxisID==='count'
+              ? `${c.dataset.label}: ${Math.round(v).toLocaleString()}건`
+              : `${c.dataset.label}: ${v.toFixed(2)}%`;
+          }}}
         },
         scales:{
           x:{ticks:{color:'#555',font:{size:10}},grid:{color:'#161620'}},
-          y:{ticks:{color:'#555',font:{size:10},callback:v=>v+'%'},grid:{color:'#161620'}}
+          rate:{position:'left',ticks:{color:'#818cf8',font:{size:10},callback:v=>v+'%'},grid:{color:'#161620'},title:{display:true,text:'전환율',color:'#555',font:{size:9}}},
+          count:{position:'right',ticks:{color:'#64748b',font:{size:10},callback:v=>v>=1000?(v/1000).toFixed(0)+'k':v},grid:{display:false},title:{display:true,text:'건수',color:'#555',font:{size:9}}}
         }
       }
     });
