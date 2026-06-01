@@ -451,8 +451,10 @@ function renderTrendCharts(brand, data, prods) {
     charts[id] = new Chart(document.getElementById(id),{
       data:{ labels, datasets:[
         // 건수 막대 (우측 축)
-        {type:'bar',label:'262Q 장바구니수',data:pad(d262.map(r=>r.cart),labels.length),backgroundColor:C262.cart+'40',yAxisID:'count',borderRadius:3,barPercentage:.6,order:3},
-        {type:'bar',label:'262Q 구매수',    data:pad(d262.map(r=>r.buy), labels.length),backgroundColor:C262.buy+'40',yAxisID:'count',borderRadius:3,barPercentage:.6,order:3},
+        {type:'bar',label:'262Q 장바구니수',data:pad(d262.map(r=>r.cart),labels.length),backgroundColor:C262.cart+'55',yAxisID:'count',borderRadius:3,order:3},
+        {type:'bar',label:'262Q 구매수',    data:pad(d262.map(r=>r.buy), labels.length),backgroundColor:C262.buy+'55',yAxisID:'count',borderRadius:3,order:3},
+        {type:'bar',label:'261Q 장바구니수',data:pad(d261.map(r=>r.cart),labels.length),backgroundColor:C261.cart+'45',yAxisID:'count',borderRadius:3,order:4},
+        {type:'bar',label:'261Q 구매수',    data:pad(d261.map(r=>r.buy), labels.length),backgroundColor:C261.buy+'45',yAxisID:'count',borderRadius:3,order:4},
         // 전환율 선 (좌측 축)
         {type:'line',label:'262Q 장바구니율',data:pad(d262.map(r=>r.cartRate),labels.length),borderColor:C262.cart,backgroundColor:'transparent',borderWidth:2,pointRadius:3,tension:.35,yAxisID:'rate',order:1},
         {type:'line',label:'262Q 구매율',    data:pad(d262.map(r=>r.buyRate), labels.length),borderColor:C262.buy, backgroundColor:'transparent',borderWidth:2,pointRadius:3,tension:.35,yAxisID:'rate',order:1},
