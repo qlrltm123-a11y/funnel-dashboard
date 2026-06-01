@@ -295,7 +295,13 @@ function parseSheet(rows) {
       const prod=r[cm.product]?.trim(), date=r[cm.date]?.trim();
       if(!prod||!date||prod==='제품'||date==='date'||date==='') continue;
       if(!d[prod]) d[prod]=[];
-      d[prod].push({date, inflow:parseNum(r[cm.inflow]), cart:parseNum(r[cm.cart]), buy:parseNum(r[cm.buy]), cartRate:parsePct(r[cm.cartRate]), buyRate:parsePct(r[cm.buyRate])});
+      const inflow=parseNum(r[cm.inflow]), cart=parseNum(r[cm.cart]), buy=parseNum(r[cm.buy]);
+      // 시트의 전환율 컬럼은 오류가 있어 신뢰하지 않고 건수에서 직접 계산
+      d[prod].push({
+        date, inflow, cart, buy,
+        cartRate: (inflow>0 && cart!=null) ? cart/inflow*100 : null,
+        buyRate:  (cart>0   && buy!=null)  ? buy/cart*100    : null,
+      });
     }
     const sk = d => { const[m,rest]=d.split('월'); return parseInt(m)*100+parseInt(rest?.replace('일','')||0); };
     Object.values(d).forEach(a=>a.sort((a,b)=>sk(a.date)-sk(b.date)));
