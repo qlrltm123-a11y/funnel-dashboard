@@ -538,6 +538,11 @@ function renderFunnelCards(brand, data, prods) {
     const cD = dlt(agg262.cartRate, agg261?.cartRate);
     const bD = dlt(agg262.buyRate,  agg261?.buyRate);
     const cmpLabel = agg261 ? `vs 261Q ${rows262.length}일` : '';
+    // 유입 직전비 (261Q 동기간 대비 %)
+    const inflowD = (agg261 && agg261.inflow>0) ? (agg262.inflow-agg261.inflow)/agg261.inflow*100 : null;
+    const inflowBadge = inflowD!==null
+      ? `<div class="stage-delta ${dcls(inflowD)}">${inflowD>0?'+':''}${inflowD.toFixed(1)}%</div>`
+      : '<div class="stage-delta delta-neu">-</div>';
 
     grid.insertAdjacentHTML('beforeend',`
       <div class="funnel-card">
@@ -553,10 +558,11 @@ function renderFunnelCards(brand, data, prods) {
             <div class="stage-label" style="color:#94a3b8">유입</div>
             <div class="stage-mid">
               <div class="stage-bar-wrap"><div class="stage-bar bar-inflow" style="width:100%"></div></div>
-              <div class="stage-count">${n(agg262.inflow)}건</div>
+              <div class="stage-count">${n(agg262.inflow)}건 ${agg261?`<span style="color:#cbd5e1">· 261Q ${n(agg261.inflow)}</span>`:''}</div>
             </div>
             <div class="stage-right">
-              <div class="stage-rate" style="color:#94a3b8">100%</div>
+              <div class="stage-rate" style="color:#94a3b8;font-size:11px">직전비</div>
+              ${inflowBadge}
             </div>
           </div>
           <div class="stage">
