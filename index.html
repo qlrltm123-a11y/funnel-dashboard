@@ -68,15 +68,16 @@ main{padding:20px 28px;max-width:1600px;margin:0 auto}
 .fc-inflow{font-size:11px;color:#555;font-weight:600}
 
 /* funnel stages */
-.funnel-stages{display:flex;flex-direction:column;gap:8px}
-.stage{display:grid;grid-template-columns:58px 1fr 80px;align-items:center;gap:10px}
-.stage-label{font-size:11px;color:#666;font-weight:600;white-space:nowrap}
-.stage-bar-wrap{position:relative;height:20px;background:#1a1a26;border-radius:5px;overflow:hidden}
-.stage-bar{height:100%;border-radius:5px;transition:width .6s cubic-bezier(.4,0,.2,1);position:relative}
-.stage-bar::after{content:attr(data-count);position:absolute;right:6px;top:50%;transform:translateY(-50%);font-size:10px;color:rgba(255,255,255,.7);font-weight:600;white-space:nowrap}
+.funnel-stages{display:flex;flex-direction:column;gap:11px}
+.stage{display:grid;grid-template-columns:62px 1fr 92px;align-items:center;gap:12px}
+.stage-label{font-size:11px;color:#888;font-weight:700;white-space:nowrap}
+.stage-mid{display:flex;flex-direction:column;gap:3px;min-width:0}
+.stage-bar-wrap{position:relative;height:8px;background:#1a1a26;border-radius:4px;overflow:hidden}
+.stage-bar{height:100%;border-radius:4px;transition:width .6s cubic-bezier(.4,0,.2,1)}
+.stage-count{font-size:11px;color:#9aa0b0;font-weight:600;white-space:nowrap}
 .stage-right{text-align:right}
-.stage-rate{font-size:14px;font-weight:700;line-height:1.1}
-.stage-delta{font-size:10px;font-weight:700;margin-top:1px}
+.stage-rate{font-size:15px;font-weight:800;line-height:1.05}
+.stage-delta{font-size:10px;font-weight:700;margin-top:2px}
 
 /* colors */
 .bar-inflow{background:linear-gradient(90deg,#334155,#475569)}
@@ -359,8 +360,9 @@ function renderFunnelCards(brand, data, prods) {
         <div class="funnel-stages">
           <div class="stage">
             <div class="stage-label" style="color:#94a3b8">유입</div>
-            <div class="stage-bar-wrap">
-              <div class="stage-bar bar-inflow" style="width:100%" data-count="${n(agg262.inflow)}"></div>
+            <div class="stage-mid">
+              <div class="stage-bar-wrap"><div class="stage-bar bar-inflow" style="width:100%"></div></div>
+              <div class="stage-count">${n(agg262.inflow)}건</div>
             </div>
             <div class="stage-right">
               <div class="stage-rate" style="color:#94a3b8">100%</div>
@@ -368,8 +370,9 @@ function renderFunnelCards(brand, data, prods) {
           </div>
           <div class="stage">
             <div class="stage-label" style="color:#818cf8">장바구니</div>
-            <div class="stage-bar-wrap">
-              <div class="stage-bar bar-cart" style="width:${cartW.toFixed(1)}%" data-count="${n(agg262.cart)}"></div>
+            <div class="stage-mid">
+              <div class="stage-bar-wrap"><div class="stage-bar bar-cart" style="width:${cartW.toFixed(1)}%"></div></div>
+              <div class="stage-count">${n(agg262.cart)}건</div>
             </div>
             <div class="stage-right">
               <div class="stage-rate" style="color:#818cf8">${f(agg262.cartRate)}</div>
@@ -378,8 +381,9 @@ function renderFunnelCards(brand, data, prods) {
           </div>
           <div class="stage">
             <div class="stage-label" style="color:#a78bfa">구매</div>
-            <div class="stage-bar-wrap">
-              <div class="stage-bar bar-buy" style="width:${buyW.toFixed(1)}%" data-count="${n(agg262.buy)}"></div>
+            <div class="stage-mid">
+              <div class="stage-bar-wrap"><div class="stage-bar bar-buy" style="width:${buyW.toFixed(1)}%"></div></div>
+              <div class="stage-count">${n(agg262.buy)}건</div>
             </div>
             <div class="stage-right">
               <div class="stage-rate" style="color:#a78bfa">${f(agg262.buyRate)}</div>
