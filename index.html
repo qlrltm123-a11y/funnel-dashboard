@@ -17,193 +17,286 @@ header{background:#111118;border-bottom:1px solid #222233;padding:14px 28px;disp
 .logo-icon{width:36px;height:36px;border-radius:8px;background:linear-gradient(135deg,#6366f1,#a78bfa);display:flex;align-items:center;justify-content:center;font-size:18px}
 .logo-text h1{font-size:15px;font-weight:700;color:#e2e2ec}
 .logo-text p{font-size:11px;color:#666}
-.header-meta{display:flex;align-items:center;gap:20px;font-size:12px;color:#888}
-.header-meta span b{color:#e2e2ec;font-weight:600}
-#btn-reload{padding:7px 14px;background:#6366f1;color:#fff;border:none;border-radius:7px;font-size:12px;font-weight:600;cursor:pointer;transition:background .2s}
-#btn-reload:hover{background:#4f52d4}
+.header-right{display:flex;align-items:center;gap:16px}
+.last-update{font-size:12px;color:#888}
+.last-update b{color:#e2e2ec}
 .status-dot{width:7px;height:7px;border-radius:50%;background:#34d399;display:inline-block;margin-right:5px;animation:pulse 2s infinite}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+#btn-reload{padding:7px 14px;background:#6366f1;color:#fff;border:none;border-radius:7px;font-size:12px;font-weight:600;cursor:pointer;transition:background .2s}
+#btn-reload:hover{background:#4f52d4}
 
-/* ── Sheet config banner ── */
-#sheet-banner{background:#1a1a2e;border-bottom:1px solid #2a2a4a;padding:10px 28px;display:flex;align-items:center;gap:10px;font-size:12px}
-#sheet-banner input{flex:1;padding:6px 10px;background:#0d0d1a;border:1px solid #333;border-radius:6px;color:#e2e2ec;font-size:12px;font-family:monospace}
-#sheet-banner button{padding:6px 14px;background:#6366f1;color:#fff;border:none;border-radius:6px;font-size:12px;font-weight:600;cursor:pointer}
-#sheet-banner .hint{color:#666;font-size:11px}
+/* ── Brand tabs (top level) ── */
+.brand-nav{background:#111118;border-bottom:1px solid #222233;padding:0 28px;display:flex;align-items:center;gap:0}
+.brand-tab{padding:13px 28px;font-size:14px;font-weight:700;cursor:pointer;color:#555;border:none;background:transparent;border-bottom:3px solid transparent;transition:all .2s;letter-spacing:.03em}
+.brand-tab:hover{color:#aaa}
+.brand-tab.active{color:#e2e2ec;border-bottom-color:#6366f1}
+.brand-tab.boh.active{border-bottom-color:#6366f1}
+.brand-tab.wm.active{border-bottom-color:#10b981}
+.brand-tab.cg.active{border-bottom-color:#f59e0b}
 
-/* ── Layout ── */
+/* ── Sheet URL banner ── */
+.url-banner{background:#16161f;border-bottom:1px solid #222233;padding:10px 28px;display:flex;align-items:center;gap:10px;font-size:12px}
+.url-banner label{font-weight:700;white-space:nowrap;min-width:60px}
+.url-banner.boh label{color:#818cf8}
+.url-banner.wm label{color:#34d399}
+.url-banner.cg label{color:#fbbf24}
+.url-banner input{flex:1;padding:6px 10px;background:#0d0d1a;border:1px solid #2a2a3a;border-radius:6px;color:#e2e2ec;font-size:12px;font-family:monospace}
+.url-banner button{padding:6px 14px;color:#fff;border:none;border-radius:6px;font-size:12px;font-weight:600;cursor:pointer}
+.url-banner.boh button{background:#6366f1}
+.url-banner.wm button{background:#10b981}
+.url-banner.cg button{background:#f59e0b;color:#000}
+.url-banner .hint{color:#555;font-size:11px;white-space:nowrap}
+
+/* ── Main ── */
 main{padding:24px 28px;max-width:1600px;margin:0 auto}
 
 /* ── Summary cards ── */
 .summary-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin-bottom:28px}
 .card{background:#16161f;border:1px solid #222233;border-radius:12px;padding:16px 18px;transition:border-color .2s}
-.card:hover{border-color:#6366f1}
+.card:hover{border-color:#6366f140}
 .card-product{font-size:12px;font-weight:700;color:#888;margin-bottom:6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.card-date{font-size:10px;color:#555;margin-bottom:10px}
+.card-date{font-size:10px;color:#444;margin-bottom:10px}
 .card-row{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:5px}
-.card-label{font-size:11px;color:#666}
+.card-label{font-size:11px;color:#555}
 .card-val{font-size:15px;font-weight:700}
-.card-delta{font-size:11px;font-weight:600;margin-left:6px}
-.pos{color:#34d399}.neg{color:#f87171}.neu{color:#666}
+.card-delta{font-size:11px;font-weight:600;margin-left:5px}
 
-/* ── Tabs ── */
-.tabs{display:flex;gap:4px;margin-bottom:20px;background:#16161f;border:1px solid #222233;border-radius:10px;padding:4px;width:fit-content}
-.tab{padding:7px 18px;border-radius:7px;font-size:13px;font-weight:600;cursor:pointer;color:#888;transition:all .2s;border:none;background:transparent}
-.tab.active{background:#6366f1;color:#fff}
+/* ── Inner tabs ── */
+.inner-tabs{display:flex;gap:4px;margin-bottom:20px;background:#16161f;border:1px solid #222233;border-radius:10px;padding:4px;width:fit-content}
+.inner-tab{padding:7px 18px;border-radius:7px;font-size:13px;font-weight:600;cursor:pointer;color:#666;transition:all .2s;border:none;background:transparent}
+.inner-tab.active{background:#6366f1;color:#fff}
+.wm-active .inner-tab.active{background:#10b981}
+.cg-active .inner-tab.active{background:#f59e0b;color:#000}
 
 /* ── Section title ── */
-.section-title{font-size:12px;font-weight:700;color:#666;text-transform:uppercase;letter-spacing:.08em;margin-bottom:14px}
+.section-title{font-size:11px;font-weight:700;color:#555;text-transform:uppercase;letter-spacing:.08em;margin-bottom:14px}
 
-/* ── Trend charts grid ── */
+/* ── Charts ── */
 .charts-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(480px,1fr));gap:18px;margin-bottom:28px}
 .chart-card{background:#16161f;border:1px solid #222233;border-radius:12px;padding:18px}
-.chart-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
-.chart-title{font-size:14px;font-weight:700}
-.chart-sub{font-size:11px;color:#666}
+.chart-title{font-size:14px;font-weight:700;margin-bottom:14px}
 .chart-wrap{position:relative;height:200px}
 
-/* ── Table ── */
+/* ── Tables ── */
 .table-wrap{overflow-x:auto;margin-bottom:28px}
 table{width:100%;border-collapse:collapse;font-size:13px}
-thead th{background:#1a1a24;color:#888;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;padding:10px 14px;text-align:left;border-bottom:1px solid #222233;white-space:nowrap}
-tbody tr{border-bottom:1px solid #1e1e2a;transition:background .15s}
+thead th{background:#1a1a24;color:#666;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;padding:10px 14px;text-align:left;border-bottom:1px solid #222233;white-space:nowrap}
+tbody tr{border-bottom:1px solid #1a1a24;transition:background .15s}
 tbody tr:hover{background:#1a1a2a}
 tbody td{padding:10px 14px;white-space:nowrap}
 .td-product{font-weight:700;color:#c4b5fd}
 .td-pos{color:#34d399;font-weight:700}
 .td-neg{color:#f87171;font-weight:700}
-.td-neu{color:#888}
+.td-neu{color:#555}
 
-/* ── Comparison bars ── */
+/* ── Bars ── */
 .cmp-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(480px,1fr));gap:18px}
 .bar-wrap{margin-bottom:14px}
-.bar-label{display:flex;justify-content:space-between;font-size:11px;color:#888;margin-bottom:4px}
-.bar-track{height:8px;background:#222233;border-radius:4px;overflow:hidden;position:relative}
-.bar-262{height:100%;border-radius:4px;background:#6366f1;transition:width .5s}
-.bar-261{height:100%;border-radius:4px;background:#f97316;transition:width .5s;margin-top:3px}
+.bar-label{display:flex;justify-content:space-between;font-size:11px;color:#666;margin-bottom:3px}
+.bar-track{height:7px;background:#1e1e2a;border-radius:4px;overflow:hidden}
+.bar-fill{height:100%;border-radius:4px;transition:width .5s}
 
 /* ── Loading / Error ── */
-#loading{display:flex;flex-direction:column;align-items:center;justify-content:center;height:300px;gap:16px}
+.brand-panel{display:none}
+.brand-panel.active{display:block}
+#global-loading{display:flex;flex-direction:column;align-items:center;justify-content:center;height:300px;gap:16px}
 .spinner{width:36px;height:36px;border:3px solid #222;border-top-color:#6366f1;border-radius:50%;animation:spin .8s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
-#error-box{background:#2a1a1a;border:1px solid #5a2a2a;border-radius:10px;padding:20px;margin:20px 0;color:#f87171;font-size:13px}
-#error-box a{color:#f59e0b;font-size:12px;margin-top:8px;display:block}
+.error-box{background:#1f1010;border:1px solid #5a2020;border-radius:10px;padding:16px 20px;margin:20px 0;color:#f87171;font-size:13px;line-height:1.6}
+.loading-inline{display:flex;align-items:center;gap:10px;padding:40px 0;color:#555;font-size:13px}
+.spinner-sm{width:20px;height:20px;border:2px solid #222;border-top-color:#6366f1;border-radius:50%;animation:spin .8s linear infinite}
 </style>
 </head>
 <body>
 
+<!-- Header -->
 <header>
   <div class="logo">
     <div class="logo-icon">📈</div>
     <div class="logo-text">
       <h1>퍼널 전환율 대시보드</h1>
-      <p>261Q vs 262Q · 제품별 일별 전환율 모니터링</p>
+      <p>261Q vs 262Q · 브랜드별 제품 퍼널 모니터링</p>
     </div>
   </div>
-  <div class="header-meta">
-    <span><span class="status-dot"></span><b id="last-updated">-</b></span>
-    <span>시트: <b id="sheet-label">-</b></span>
-    <button id="btn-reload" onclick="loadData()">↻ 새로고침</button>
+  <div class="header-right">
+    <span class="last-update"><span class="status-dot"></span>최종 업데이트: <b id="last-updated">-</b></span>
+    <button id="btn-reload" onclick="reloadCurrent()">↻ 새로고침</button>
   </div>
 </header>
 
-<div id="sheet-banner">
-  <span style="color:#a78bfa;font-weight:700;white-space:nowrap">📋 시트 URL</span>
-  <input id="sheet-url-input" type="text" placeholder="구글 시트 게시 CSV URL을 입력하세요 (파일 > 웹에 게시 > CSV)">
-  <button onclick="applySheetUrl()">적용</button>
-  <span class="hint">※ 시트가 비공개면 파일 &gt; 웹에 게시 &gt; CSV 형식으로 공개 URL을 복사하세요</span>
+<!-- Brand tabs -->
+<nav class="brand-nav">
+  <button class="brand-tab boh active" onclick="switchBrand('BOH',this)">BOH</button>
+  <button class="brand-tab wm" onclick="switchBrand('WM',this)">WM</button>
+  <button class="brand-tab cg" onclick="switchBrand('CG',this)">CG</button>
+</nav>
+
+<!-- URL banners (one per brand) -->
+<div id="url-BOH" class="url-banner boh">
+  <label>BOH 시트</label>
+  <input id="url-input-BOH" type="text" placeholder="BOH 시트 웹 게시 CSV URL">
+  <button onclick="applyUrl('BOH')">적용</button>
+  <span class="hint">파일 &gt; 웹에 게시 &gt; CSV</span>
+</div>
+<div id="url-WM" class="url-banner wm" style="display:none">
+  <label>WM 시트</label>
+  <input id="url-input-WM" type="text" placeholder="WM 시트 웹 게시 CSV URL">
+  <button onclick="applyUrl('WM')">적용</button>
+  <span class="hint">파일 &gt; 웹에 게시 &gt; CSV</span>
+</div>
+<div id="url-CG" class="url-banner cg" style="display:none">
+  <label>CG 시트</label>
+  <input id="url-input-CG" type="text" placeholder="CG 시트 웹 게시 CSV URL">
+  <button onclick="applyUrl('CG')">적용</button>
+  <span class="hint">파일 &gt; 웹에 게시 &gt; CSV</span>
 </div>
 
 <main>
-  <div id="loading"><div class="spinner"></div><span style="color:#666">데이터 로딩 중...</span></div>
-  <div id="error-box" style="display:none"></div>
-  <div id="app" style="display:none">
-
-    <!-- Summary -->
-    <div class="section-title">최신 실적 스냅샷 (262Q · 직전일 대비)</div>
-    <div class="summary-grid" id="summary-grid"></div>
-
-    <!-- Tabs -->
-    <div class="tabs">
-      <button class="tab active" onclick="switchTab('trend',this)">📊 트렌드</button>
-      <button class="tab" onclick="switchTab('delta',this)">📋 직전일 델타</button>
-      <button class="tab" onclick="switchTab('compare',this)">🔀 261Q 비교</button>
+  <!-- BOH Panel -->
+  <div id="panel-BOH" class="brand-panel active">
+    <div id="loading-BOH" class="loading-inline"><div class="spinner-sm"></div>데이터 로딩 중...</div>
+    <div id="error-BOH" class="error-box" style="display:none"></div>
+    <div id="app-BOH" style="display:none">
+      <div class="section-title">최신 스냅샷 (262Q · 직전일 대비)</div>
+      <div class="summary-grid" id="summary-BOH"></div>
+      <div class="inner-tabs" id="innertabs-BOH">
+        <button class="inner-tab active" onclick="switchInner('BOH','trend',this)">📊 트렌드</button>
+        <button class="inner-tab" onclick="switchInner('BOH','delta',this)">📋 직전일 델타</button>
+        <button class="inner-tab" onclick="switchInner('BOH','compare',this)">🔀 261Q 비교</button>
+      </div>
+      <div id="inner-BOH-trend"><div class="section-title">일별 전환율 (실선=262Q · 점선=261Q)</div><div class="charts-grid" id="charts-BOH"></div></div>
+      <div id="inner-BOH-delta" style="display:none"><div class="section-title">262Q 직전일 대비 변동</div><div class="table-wrap"><table><thead><tr><th>제품</th><th>기준일</th><th>직전일</th><th>🛒 장바구니(현)</th><th>🛒 장바구니(전)</th><th>🛒 변동</th><th>💳 구매(현)</th><th>💳 구매(전)</th><th>💳 변동</th></tr></thead><tbody id="delta-BOH"></tbody></table></div></div>
+      <div id="inner-BOH-compare" style="display:none"><div class="section-title">동일 영업일 기준 비교</div><div class="table-wrap"><table><thead><tr><th>제품</th><th>영업일</th><th>262Q 날짜</th><th>261Q 날짜</th><th>🛒 262Q</th><th>🛒 261Q</th><th>🛒 차이</th><th>💳 262Q</th><th>💳 261Q</th><th>💳 차이</th></tr></thead><tbody id="cmp-BOH"></tbody></table></div><div class="section-title" style="margin-top:20px">바 차트 비교</div><div class="cmp-grid" id="bars-BOH"></div></div>
     </div>
+  </div>
 
-    <!-- Tab: Trend -->
-    <div id="tab-trend">
-      <div class="section-title">일별 전환율 추이 (실선=262Q · 점선=261Q)</div>
-      <div class="charts-grid" id="charts-grid"></div>
+  <!-- WM Panel -->
+  <div id="panel-WM" class="brand-panel">
+    <div id="loading-WM" class="loading-inline"><div class="spinner-sm"></div>데이터 로딩 중...</div>
+    <div id="error-WM" class="error-box" style="display:none"></div>
+    <div id="app-WM" style="display:none">
+      <div class="section-title">최신 스냅샷 (262Q · 직전일 대비)</div>
+      <div class="summary-grid" id="summary-WM"></div>
+      <div class="inner-tabs" id="innertabs-WM">
+        <button class="inner-tab active" onclick="switchInner('WM','trend',this)">📊 트렌드</button>
+        <button class="inner-tab" onclick="switchInner('WM','delta',this)">📋 직전일 델타</button>
+        <button class="inner-tab" onclick="switchInner('WM','compare',this)">🔀 261Q 비교</button>
+      </div>
+      <div id="inner-WM-trend"><div class="section-title">일별 전환율 (실선=262Q · 점선=261Q)</div><div class="charts-grid" id="charts-WM"></div></div>
+      <div id="inner-WM-delta" style="display:none"><div class="section-title">262Q 직전일 대비 변동</div><div class="table-wrap"><table><thead><tr><th>제품</th><th>기준일</th><th>직전일</th><th>🛒 장바구니(현)</th><th>🛒 장바구니(전)</th><th>🛒 변동</th><th>💳 구매(현)</th><th>💳 구매(전)</th><th>💳 변동</th></tr></thead><tbody id="delta-WM"></tbody></table></div></div>
+      <div id="inner-WM-compare" style="display:none"><div class="section-title">동일 영업일 기준 비교</div><div class="table-wrap"><table><thead><tr><th>제품</th><th>영업일</th><th>262Q 날짜</th><th>261Q 날짜</th><th>🛒 262Q</th><th>🛒 261Q</th><th>🛒 차이</th><th>💳 262Q</th><th>💳 261Q</th><th>💳 차이</th></tr></thead><tbody id="cmp-WM"></tbody></table></div><div class="section-title" style="margin-top:20px">바 차트 비교</div><div class="cmp-grid" id="bars-WM"></div></div>
     </div>
+  </div>
 
-    <!-- Tab: Delta -->
-    <div id="tab-delta" style="display:none">
-      <div class="section-title">262Q 직전일 대비 변동</div>
-      <div class="table-wrap"><table id="delta-table">
-        <thead><tr>
-          <th>제품</th><th>기준일</th><th>직전일</th>
-          <th>🛒 장바구니(현재)</th><th>🛒 장바구니(직전)</th><th>🛒 변동</th>
-          <th>💳 구매(현재)</th><th>💳 구매(직전)</th><th>💳 변동</th>
-        </tr></thead>
-        <tbody id="delta-tbody"></tbody>
-      </table></div>
+  <!-- CG Panel -->
+  <div id="panel-CG" class="brand-panel">
+    <div id="loading-CG" class="loading-inline"><div class="spinner-sm"></div>데이터 로딩 중...</div>
+    <div id="error-CG" class="error-box" style="display:none"></div>
+    <div id="app-CG" style="display:none">
+      <div class="section-title">최신 스냅샷 (262Q · 직전일 대비)</div>
+      <div class="summary-grid" id="summary-CG"></div>
+      <div class="inner-tabs" id="innertabs-CG">
+        <button class="inner-tab active" onclick="switchInner('CG','trend',this)">📊 트렌드</button>
+        <button class="inner-tab" onclick="switchInner('CG','delta',this)">📋 직전일 델타</button>
+        <button class="inner-tab" onclick="switchInner('CG','compare',this)">🔀 261Q 비교</button>
+      </div>
+      <div id="inner-CG-trend"><div class="section-title">일별 전환율 (실선=262Q · 점선=261Q)</div><div class="charts-grid" id="charts-CG"></div></div>
+      <div id="inner-CG-delta" style="display:none"><div class="section-title">262Q 직전일 대비 변동</div><div class="table-wrap"><table><thead><tr><th>제품</th><th>기준일</th><th>직전일</th><th>🛒 장바구니(현)</th><th>🛒 장바구니(전)</th><th>🛒 변동</th><th>💳 구매(현)</th><th>💳 구매(전)</th><th>💳 변동</th></tr></thead><tbody id="delta-CG"></tbody></table></div></div>
+      <div id="inner-CG-compare" style="display:none"><div class="section-title">동일 영업일 기준 비교</div><div class="table-wrap"><table><thead><tr><th>제품</th><th>영업일</th><th>262Q 날짜</th><th>261Q 날짜</th><th>🛒 262Q</th><th>🛒 261Q</th><th>🛒 차이</th><th>💳 262Q</th><th>💳 261Q</th><th>💳 차이</th></tr></thead><tbody id="cmp-CG"></tbody></table></div><div class="section-title" style="margin-top:20px">바 차트 비교</div><div class="cmp-grid" id="bars-CG"></div></div>
     </div>
-
-    <!-- Tab: Compare -->
-    <div id="tab-compare" style="display:none">
-      <div class="section-title">동일 영업일 기준 262Q vs 261Q</div>
-      <div class="table-wrap"><table id="cmp-table">
-        <thead><tr>
-          <th>제품</th><th>영업일</th><th>262Q 날짜</th><th>261Q 날짜</th>
-          <th>🛒 262Q</th><th>🛒 261Q</th><th>🛒 차이</th>
-          <th>💳 262Q</th><th>💳 261Q</th><th>💳 차이</th>
-        </tr></thead>
-        <tbody id="cmp-tbody"></tbody>
-      </table></div>
-      <div class="section-title" style="margin-top:24px">전환율 바 차트 비교</div>
-      <div class="cmp-grid" id="cmp-grid"></div>
-    </div>
-
   </div>
 </main>
 
 <script>
-// ── Config ──────────────────────────────────────────────────────────────────
-const STORAGE_KEY = 'funnel_sheet_url';
-const DEFAULT_URL = ''; // 게시된 URL을 여기에 기본값으로 넣을 수 있음
-
-const PRODUCT_ORDER = [
-  '아사츄르 요르탄','기획박스','콜겔 미스트','혼합박스',
-  '마리에 콜라보','3d 단품','nad단품','아이크림',
-  '콜라겐 토너','콜라겐 크림 단품',
-];
-
-const COLORS = {
-  '262Q': { cart: '#6366f1', buy: '#a78bfa' },
-  '261Q': { cart: '#f97316', buy: '#fb923c' },
+// ── Constants ───────────────────────────────────────────────────────────────
+const BRANDS = ['BOH', 'WM', 'CG'];
+const BRAND_COLORS = {
+  BOH: { accent: '#6366f1', accent2: '#a78bfa' },
+  WM:  { accent: '#10b981', accent2: '#34d399' },
+  CG:  { accent: '#f59e0b', accent2: '#fbbf24' },
 };
+const Q262_COLOR = { cart: '#6366f1', buy: '#a78bfa' };
+const Q261_COLOR = { cart: '#f97316', buy: '#fb923c' };
 
+const COL_262 = { code:0, date:1, product:2, inflow:3, cart:4, buy:5, cartRate:6, buyRate:7 };
+const COL_261 = { code:9, date:10, product:11, inflow:12, cart:13, buy:14, cartRate:15, buyRate:16 };
+
+// State
+let currentBrand = 'BOH';
+let brandData = { BOH: null, WM: null, CG: null }; // { '262Q':{prod:[rows]}, '261Q':{...} }
 let chartInstances = {};
-let allData = { '262Q': {}, '261Q': {} };
 
-// ── URL 관리 ──────────────────────────────────────────────────────────────
-function getSavedUrl() {
-  return localStorage.getItem(STORAGE_KEY) || DEFAULT_URL;
+// ── Storage ──────────────────────────────────────────────────────────────────
+function getUrl(brand) { return localStorage.getItem(`funnel_url_${brand}`) || ''; }
+function saveUrl(brand, url) { localStorage.setItem(`funnel_url_${brand}`, url); }
+
+// ── Brand switching ───────────────────────────────────────────────────────────
+function switchBrand(brand, btn) {
+  currentBrand = brand;
+  BRANDS.forEach(b => {
+    document.getElementById(`panel-${b}`).classList.toggle('active', b === brand);
+    document.getElementById(`url-${b}`).style.display = b === brand ? '' : 'none';
+  });
+  document.querySelectorAll('.brand-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  // Load if not yet loaded
+  if (!brandData[brand]) loadBrand(brand);
 }
-function applySheetUrl() {
-  const url = document.getElementById('sheet-url-input').value.trim();
+
+function reloadCurrent() { loadBrand(currentBrand, true); }
+
+function applyUrl(brand) {
+  const url = document.getElementById(`url-input-${brand}`).value.trim();
   if (!url) return alert('URL을 입력해주세요');
-  localStorage.setItem(STORAGE_KEY, url);
-  loadData();
+  saveUrl(brand, url);
+  loadBrand(brand, true);
 }
 
-// ── CSV 파싱 ──────────────────────────────────────────────────────────────
+// ── Data loading ──────────────────────────────────────────────────────────────
+async function loadBrand(brand, force = false) {
+  if (!force && brandData[brand]) return; // already loaded
+
+  const url = getUrl(brand);
+  document.getElementById(`url-input-${brand}`).value = url;
+
+  showLoading(brand);
+
+  if (!url) {
+    showError(brand, `${brand} 시트 URL을 입력하고 적용 버튼을 눌러주세요.<br><small style="color:#666">구글 시트 &gt; 파일 &gt; 웹에 게시 &gt; CSV &gt; URL 복사</small>`);
+    return;
+  }
+
+  let text;
+  const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`;
+  try {
+    const r = await fetch(proxyUrl, { cache: 'no-store' });
+    if (!r.ok) throw new Error(`HTTP ${r.status}`);
+    text = await r.text();
+  } catch {
+    try {
+      const r2 = await fetch(url, { cache: 'no-store' });
+      if (!r2.ok) throw new Error(`HTTP ${r2.status}`);
+      text = await r2.text();
+    } catch(e) {
+      showError(brand, `로드 실패: ${e.message}<br>시트가 웹에 게시되어 있는지 확인해주세요.`);
+      return;
+    }
+  }
+
+  brandData[brand] = parseSheetData(parseCSV(text));
+  renderBrand(brand);
+
+  const now = new Date();
+  document.getElementById('last-updated').textContent =
+    `${now.getMonth()+1}/${now.getDate()} ${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}`;
+}
+
+// ── CSV / Parse ───────────────────────────────────────────────────────────────
 function parseCSV(text) {
   const rows = [];
-  const lines = text.split(/\r?\n/);
-  for (const line of lines) {
+  for (const line of text.split(/\r?\n/)) {
     if (!line.trim()) continue;
-    const cols = [];
-    let cur = '', inQ = false;
+    const cols = []; let cur = '', inQ = false;
     for (let i = 0; i < line.length; i++) {
       const c = line[i];
       if (c === '"') { inQ = !inQ; continue; }
@@ -217,357 +310,229 @@ function parseCSV(text) {
 }
 
 function parsePct(v) {
-  if (!v || v === '-' || v === '') return null;
+  if (!v || v === '-') return null;
   const n = parseFloat(v.replace('%','').replace(',',''));
   return isNaN(n) ? null : n;
 }
-function parseNum(v) {
-  if (!v || v === '-' || v === '') return null;
-  const n = parseFloat(v.replace(/,/g,''));
-  return isNaN(n) ? null : n;
-}
 
-// ── 데이터 로드 ───────────────────────────────────────────────────────────
-async function loadData() {
-  const url = getSavedUrl();
-  document.getElementById('sheet-url-input').value = url;
-
-  show('loading');
-  hide('app');
-  hide('error-box');
-
-  if (!url) {
-    showError('시트 URL을 위에 입력하고 적용 버튼을 눌러주세요.<a href="#" onclick="document.getElementById(\'sheet-url-input\').focus()">URL 입력하기</a>');
-    return;
-  }
-
-  // CORS 우회: allorigins 프록시 사용
-  const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`;
-  let text;
-  try {
-    const res = await fetch(proxyUrl, { cache: 'no-store' });
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    text = await res.text();
-  } catch(e) {
-    // 프록시 실패 시 직접 시도
-    try {
-      const res2 = await fetch(url, { cache: 'no-store' });
-      if (!res2.ok) throw new Error(`HTTP ${res2.status}`);
-      text = await res2.text();
-    } catch(e2) {
-      showError(`시트 로드 실패: ${e2.message}<br>시트가 웹에 게시(공개)되어 있는지 확인해주세요.<a href="https://support.google.com/docs/answer/37579" target="_blank">게시 방법 보기</a>`);
-      return;
-    }
-  }
-
-  processData(parseCSV(text));
-}
-
-function processData(rows) {
-  // 헤더 행 건너뜀 (row[0])
-  // 262Q: cols 0-7, 261Q: cols 9-16
-  const colMap = { code:0, date:1, product:2, inflow:3, cart:4, buy:5, cartRate:6, buyRate:7 };
-  const colMap2 = { code:9, date:10, product:11, inflow:12, cart:13, buy:14, cartRate:15, buyRate:16 };
-
-  function extractRows(rows, cm, quarter) {
+function parseSheetData(rows) {
+  function extract(cm) {
     const data = {};
     for (let i = 1; i < rows.length; i++) {
       const r = rows[i];
       if (!r || r.length < cm.buyRate + 1) continue;
       const prod = r[cm.product]?.trim();
       const date = r[cm.date]?.trim();
-      if (!prod || !date || prod === '제품' || date === 'date') continue;
+      if (!prod || !date || prod === '제품' || date === 'date' || date === '') continue;
       if (!data[prod]) data[prod] = [];
       data[prod].push({
         date,
         cartRate: parsePct(r[cm.cartRate]),
-        buyRate: parsePct(r[cm.buyRate]),
-        inflow: parseNum(r[cm.inflow]),
+        buyRate:  parsePct(r[cm.buyRate]),
       });
     }
+    // sort by date
+    const sortKey = d => { const [m,rest] = d.split('월'); return parseInt(m)*100 + parseInt(rest?.replace('일','') || 0); };
+    Object.values(data).forEach(arr => arr.sort((a,b) => sortKey(a.date) - sortKey(b.date)));
     return data;
   }
-
-  allData['262Q'] = extractRows(rows, colMap, '262Q');
-  allData['261Q'] = extractRows(rows, colMap2, '261Q');
-
-  // 날짜 순서 정렬 (월/일 기준)
-  const sortByDate = arr => arr.sort((a,b) => {
-    const parse = d => { const [m,rest] = d.split('월'); return parseInt(m)*100 + parseInt(rest?.replace('일','') || 0); };
-    return parse(a.date) - parse(b.date);
-  });
-  Object.values(allData['262Q']).forEach(sortByDate);
-  Object.values(allData['261Q']).forEach(sortByDate);
-
-  const now = new Date();
-  document.getElementById('last-updated').textContent =
-    `${now.getMonth()+1}/${now.getDate()} ${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}`;
-  document.getElementById('sheet-label').textContent = '구글 시트';
-
-  renderSummary();
-  renderCharts();
-  renderDeltaTable();
-  renderCmpTable();
-
-  hide('loading');
-  show('app');
+  return { '262Q': extract(COL_262), '261Q': extract(COL_261) };
 }
 
-// ── Summary cards ──────────────────────────────────────────────────────────
-function renderSummary() {
-  const grid = document.getElementById('summary-grid');
+// ── Render ────────────────────────────────────────────────────────────────────
+function renderBrand(brand) {
+  const data = brandData[brand];
+  const products = [...new Set([...Object.keys(data['262Q']), ...Object.keys(data['261Q'])])];
+
+  renderSummary(brand, data, products);
+  renderCharts(brand, data, products);
+  renderDeltaTable(brand, data, products);
+  renderCmpTable(brand, data, products);
+
+  document.getElementById(`loading-${brand}`).style.display = 'none';
+  document.getElementById(`error-${brand}`).style.display = 'none';
+  document.getElementById(`app-${brand}`).style.display = '';
+}
+
+function renderSummary(brand, data, products) {
+  const grid = document.getElementById(`summary-${brand}`);
   grid.innerHTML = '';
-  const products = getProductList();
-
   products.forEach(prod => {
-    const rows = allData['262Q'][prod] || [];
+    const rows = data['262Q'][prod] || [];
     if (!rows.length) return;
-    const last = rows[rows.length - 1];
-    const prev = rows.length >= 2 ? rows[rows.length - 2] : null;
-
-    const cartD = delta(last.cartRate, prev?.cartRate);
-    const buyD = delta(last.buyRate, prev?.buyRate);
-
+    const last = rows[rows.length-1];
+    const prev = rows.length >= 2 ? rows[rows.length-2] : null;
+    const cD = delta(last.cartRate, prev?.cartRate);
+    const bD = delta(last.buyRate,  prev?.buyRate);
     grid.insertAdjacentHTML('beforeend', `
       <div class="card">
         <div class="card-product" title="${prod}">${prod}</div>
         <div class="card-date">${last.date}</div>
         <div class="card-row">
           <span class="card-label">🛒 장바구니</span>
-          <span class="card-val">${fmt(last.cartRate)}<span class="card-delta ${deltaClass(cartD)}">${fmtDelta(cartD)}</span></span>
+          <span class="card-val">${fmt(last.cartRate)}<span class="card-delta ${dcls(cD)}">${fmtD(cD)}</span></span>
         </div>
         <div class="card-row">
           <span class="card-label">💳 구매</span>
-          <span class="card-val">${fmt(last.buyRate)}<span class="card-delta ${deltaClass(buyD)}">${fmtDelta(buyD)}</span></span>
+          <span class="card-val">${fmt(last.buyRate)}<span class="card-delta ${dcls(bD)}">${fmtD(bD)}</span></span>
         </div>
-      </div>
-    `);
+      </div>`);
   });
 }
 
-// ── Trend Charts ──────────────────────────────────────────────────────────
-function renderCharts() {
-  const grid = document.getElementById('charts-grid');
+function renderCharts(brand, data, products) {
+  const grid = document.getElementById(`charts-${brand}`);
   grid.innerHTML = '';
-  Object.values(chartInstances).forEach(c => c.destroy());
-  chartInstances = {};
-
-  const products = getProductList();
+  // destroy old charts for this brand
+  Object.keys(chartInstances).filter(k=>k.startsWith(brand+'_')).forEach(k=>{
+    chartInstances[k].destroy(); delete chartInstances[k];
+  });
 
   products.forEach(prod => {
-    const d262 = allData['262Q'][prod] || [];
-    const d261 = allData['261Q'][prod] || [];
+    const d262 = data['262Q'][prod] || [];
+    const d261 = data['261Q'][prod] || [];
     if (!d262.length && !d261.length) return;
 
-    const id = `chart-${prod.replace(/\s/g,'_')}`;
+    const id = `${brand}_chart_${prod.replace(/\s+/g,'_')}`;
     grid.insertAdjacentHTML('beforeend', `
       <div class="chart-card">
-        <div class="chart-header">
-          <span class="chart-title">${prod}</span>
-          <span class="chart-sub">🟣 장바구니 · 🔵 구매 전환율</span>
-        </div>
+        <div class="chart-title">${prod}</div>
         <div class="chart-wrap"><canvas id="${id}"></canvas></div>
-      </div>
-    `);
+      </div>`);
 
-    const labels262 = d262.map(r => r.date);
-    const labels261 = d261.map(r => r.date);
-    // x축은 262Q 날짜 기준, 261Q는 인덱스 맞춤
-    const maxLen = Math.max(labels262.length, labels261.length);
-    const labels = labels262.length >= labels261.length ? labels262 : labels261;
+    const labels = (d262.length >= d261.length ? d262 : d261).map(r=>r.date);
+    const pad = (arr, len) => { const a=[...arr]; while(a.length<len) a.push(null); return a; };
 
-    const pad = (arr, len) => { const a = [...arr]; while(a.length < len) a.push(null); return a; };
-
-    const ctx = document.getElementById(id).getContext('2d');
-    chartInstances[id] = new Chart(ctx, {
+    chartInstances[id] = new Chart(document.getElementById(id).getContext('2d'), {
       type: 'line',
       data: {
         labels,
         datasets: [
-          {
-            label: '262Q 장바구니', data: pad(d262.map(r=>r.cartRate), labels.length),
-            borderColor: COLORS['262Q'].cart, backgroundColor: COLORS['262Q'].cart+'22',
-            borderWidth: 2, pointRadius: 4, tension: 0.3, fill: false,
-          },
-          {
-            label: '262Q 구매', data: pad(d262.map(r=>r.buyRate), labels.length),
-            borderColor: COLORS['262Q'].buy, backgroundColor: 'transparent',
-            borderWidth: 2, pointRadius: 4, tension: 0.3, fill: false,
-          },
-          {
-            label: '261Q 장바구니', data: pad(d261.map(r=>r.cartRate), labels.length),
-            borderColor: COLORS['261Q'].cart, backgroundColor: 'transparent',
-            borderWidth: 2, borderDash: [5,4], pointRadius: 3, tension: 0.3, fill: false,
-          },
-          {
-            label: '261Q 구매', data: pad(d261.map(r=>r.buyRate), labels.length),
-            borderColor: COLORS['261Q'].buy, backgroundColor: 'transparent',
-            borderWidth: 2, borderDash: [5,4], pointRadius: 3, tension: 0.3, fill: false,
-          },
+          { label:'262Q 장바구니', data: pad(d262.map(r=>r.cartRate), labels.length), borderColor: Q262_COLOR.cart, backgroundColor: Q262_COLOR.cart+'22', borderWidth:2, pointRadius:4, tension:.3, fill:false },
+          { label:'262Q 구매',     data: pad(d262.map(r=>r.buyRate),  labels.length), borderColor: Q262_COLOR.buy,  backgroundColor:'transparent', borderWidth:2, pointRadius:4, tension:.3, fill:false },
+          { label:'261Q 장바구니', data: pad(d261.map(r=>r.cartRate), labels.length), borderColor: Q261_COLOR.cart, backgroundColor:'transparent', borderWidth:2, borderDash:[5,4], pointRadius:3, tension:.3, fill:false },
+          { label:'261Q 구매',     data: pad(d261.map(r=>r.buyRate),  labels.length), borderColor: Q261_COLOR.buy,  backgroundColor:'transparent', borderWidth:2, borderDash:[5,4], pointRadius:3, tension:.3, fill:false },
         ]
       },
       options: {
-        responsive: true, maintainAspectRatio: false,
+        responsive:true, maintainAspectRatio:false,
         plugins: {
-          legend: { labels: { color:'#aaa', font:{size:11}, boxWidth:14, padding:10 } },
-          tooltip: {
-            callbacks: {
-              label: ctx => `${ctx.dataset.label}: ${ctx.parsed.y !== null ? ctx.parsed.y.toFixed(2)+'%' : '-'}`
-            }
-          }
+          legend:{ labels:{ color:'#888', font:{size:11}, boxWidth:14, padding:10 } },
+          tooltip:{ callbacks:{ label: c => `${c.dataset.label}: ${c.parsed.y!==null ? c.parsed.y.toFixed(2)+'%' : '-'}` } }
         },
         scales: {
-          x: { ticks:{color:'#777',font:{size:10}}, grid:{color:'#1e1e2a'} },
-          y: { ticks:{color:'#777',font:{size:10},callback:v=>v+'%'}, grid:{color:'#1e1e2a'} }
+          x:{ ticks:{color:'#666',font:{size:10}}, grid:{color:'#1a1a24'} },
+          y:{ ticks:{color:'#666',font:{size:10},callback:v=>v+'%'}, grid:{color:'#1a1a24'} }
         }
       }
     });
   });
 }
 
-// ── Delta Table ───────────────────────────────────────────────────────────
-function renderDeltaTable() {
-  const tbody = document.getElementById('delta-tbody');
+function renderDeltaTable(brand, data, products) {
+  const tbody = document.getElementById(`delta-${brand}`);
   tbody.innerHTML = '';
-  const products = getProductList();
-
   products.forEach(prod => {
-    const rows = allData['262Q'][prod] || [];
+    const rows = data['262Q'][prod] || [];
     if (rows.length < 2) return;
     const last = rows[rows.length-1], prev = rows[rows.length-2];
-    const cartD = delta(last.cartRate, prev.cartRate);
-    const buyD = delta(last.buyRate, prev.buyRate);
-
+    const cD = delta(last.cartRate, prev.cartRate);
+    const bD = delta(last.buyRate, prev.buyRate);
     tbody.insertAdjacentHTML('beforeend', `<tr>
       <td class="td-product">${prod}</td>
-      <td>${last.date}</td><td>${prev.date}</td>
-      <td>${fmt(last.cartRate)}</td><td>${fmt(prev.cartRate)}</td>
-      <td class="${deltaClass(cartD)}">${fmtDeltaArrow(cartD)}</td>
-      <td>${fmt(last.buyRate)}</td><td>${fmt(prev.buyRate)}</td>
-      <td class="${deltaClass(buyD)}">${fmtDeltaArrow(buyD)}</td>
+      <td>${last.date}</td><td style="color:#555">${prev.date}</td>
+      <td>${fmt(last.cartRate)}</td><td style="color:#555">${fmt(prev.cartRate)}</td>
+      <td class="${dcls(cD)}">${fmtArr(cD)}</td>
+      <td>${fmt(last.buyRate)}</td><td style="color:#555">${fmt(prev.buyRate)}</td>
+      <td class="${dcls(bD)}">${fmtArr(bD)}</td>
     </tr>`);
   });
 }
 
-// ── Comparison Table & Bars ───────────────────────────────────────────────
-function renderCmpTable() {
-  const tbody = document.getElementById('cmp-tbody');
+function renderCmpTable(brand, data, products) {
+  const tbody = document.getElementById(`cmp-${brand}`);
+  const barsEl = document.getElementById(`bars-${brand}`);
   tbody.innerHTML = '';
-  const cmpGrid = document.getElementById('cmp-grid');
-  cmpGrid.innerHTML = '';
-  const products = getProductList();
+  barsEl.innerHTML = '';
 
   products.forEach(prod => {
-    const d262 = allData['262Q'][prod] || [];
-    const d261 = allData['261Q'][prod] || [];
-    const minLen = Math.min(d262.length, d261.length);
-    if (!minLen) return;
+    const d262 = data['262Q'][prod] || [];
+    const d261 = data['261Q'][prod] || [];
+    const n = Math.min(d262.length, d261.length);
+    if (!n) return;
 
-    // Bar chart card per product
-    const html = buildBarCard(prod, d262, d261);
-    cmpGrid.insertAdjacentHTML('beforeend', html);
+    // bar card
+    const maxC = Math.max(...d262.map(r=>r.cartRate||0), ...d261.map(r=>r.cartRate||0), 1);
+    const maxB = Math.max(...d262.map(r=>r.buyRate||0),  ...d261.map(r=>r.buyRate||0),  1);
+    let barRows = '';
+    for (let i=0; i<n; i++) {
+      const r2=d262[i], r1=d261[i];
+      barRows += `<div class="bar-wrap">
+        <div class="bar-label"><span>${r2.date} <span style="color:#f97316;font-size:10px">(261Q: ${r1.date})</span></span><span>🛒 ${fmt(r2.cartRate)} vs ${fmt(r1.cartRate)}</span></div>
+        <div class="bar-track"><div class="bar-fill" style="width:${pct(r2.cartRate,maxC)}%;background:#6366f1"></div></div>
+        <div class="bar-track" style="margin-top:2px"><div class="bar-fill" style="width:${pct(r1.cartRate,maxC)}%;background:#f97316"></div></div>
+        <div class="bar-label" style="margin-top:4px"><span></span><span>💳 ${fmt(r2.buyRate)} vs ${fmt(r1.buyRate)}</span></div>
+        <div class="bar-track"><div class="bar-fill" style="width:${pct(r2.buyRate,maxB)}%;background:#a78bfa"></div></div>
+        <div class="bar-track" style="margin-top:2px"><div class="bar-fill" style="width:${pct(r1.buyRate,maxB)}%;background:#fb923c"></div></div>
+      </div>`;
+    }
+    barsEl.insertAdjacentHTML('beforeend', `<div class="chart-card"><div class="chart-title" style="margin-bottom:14px">${prod}</div>${barRows}</div>`);
 
-    for (let i = 0; i < minLen; i++) {
-      const r262 = d262[i], r261 = d261[i];
-      const cartD = delta(r262.cartRate, r261.cartRate);
-      const buyD = delta(r262.buyRate, r261.buyRate);
+    // table rows
+    for (let i=0; i<n; i++) {
+      const r2=d262[i], r1=d261[i];
+      const cD=delta(r2.cartRate,r1.cartRate), bD=delta(r2.buyRate,r1.buyRate);
       tbody.insertAdjacentHTML('beforeend', `<tr>
         <td class="td-product">${prod}</td>
-        <td style="color:#888">${i+1}일차</td>
-        <td>${r262.date}</td><td style="color:#f97316">${r261.date}</td>
-        <td>${fmt(r262.cartRate)}</td><td style="color:#f97316">${fmt(r261.cartRate)}</td>
-        <td class="${deltaClass(cartD)}">${fmtDeltaArrow(cartD)}</td>
-        <td>${fmt(r262.buyRate)}</td><td style="color:#f97316">${fmt(r261.buyRate)}</td>
-        <td class="${deltaClass(buyD)}">${fmtDeltaArrow(buyD)}</td>
+        <td style="color:#555">${i+1}일차</td>
+        <td>${r2.date}</td><td style="color:#f97316">${r1.date}</td>
+        <td>${fmt(r2.cartRate)}</td><td style="color:#f97316">${fmt(r1.cartRate)}</td>
+        <td class="${dcls(cD)}">${fmtArr(cD)}</td>
+        <td>${fmt(r2.buyRate)}</td><td style="color:#f97316">${fmt(r1.buyRate)}</td>
+        <td class="${dcls(bD)}">${fmtArr(bD)}</td>
       </tr>`);
     }
   });
 }
 
-function buildBarCard(prod, d262, d261) {
-  const minLen = Math.min(d262.length, d261.length);
-  const maxCart = Math.max(...d262.map(r=>r.cartRate||0), ...d261.map(r=>r.cartRate||0), 1);
-  const maxBuy = Math.max(...d262.map(r=>r.buyRate||0), ...d261.map(r=>r.buyRate||0), 1);
-
-  let rows = '';
-  for (let i = 0; i < minLen; i++) {
-    const r262 = d262[i], r261 = d261[i];
-    const cw262 = ((r262.cartRate||0)/maxCart*100).toFixed(1);
-    const cw261 = ((r261.cartRate||0)/maxCart*100).toFixed(1);
-    const bw262 = ((r262.buyRate||0)/maxBuy*100).toFixed(1);
-    const bw261 = ((r261.buyRate||0)/maxBuy*100).toFixed(1);
-    rows += `
-      <div class="bar-wrap">
-        <div class="bar-label">
-          <span>${r262.date} <small style="color:#f97316">(261Q: ${r261.date})</small></span>
-          <span>🛒 262Q ${fmt(r262.cartRate)} / 261Q ${fmt(r261.cartRate)}</span>
-        </div>
-        <div class="bar-track"><div class="bar-262" style="width:${cw262}%"></div></div>
-        <div class="bar-track" style="margin-top:2px"><div class="bar-261" style="width:${cw261}%"></div></div>
-        <div class="bar-label" style="margin-top:3px">
-          <span></span>
-          <span>💳 262Q ${fmt(r262.buyRate)} / 261Q ${fmt(r261.buyRate)}</span>
-        </div>
-        <div class="bar-track"><div class="bar-262" style="width:${bw262}%;background:#a78bfa"></div></div>
-        <div class="bar-track" style="margin-top:2px"><div class="bar-261" style="width:${bw261}%;background:#fb923c"></div></div>
-      </div>`;
-  }
-  return `<div class="chart-card"><div class="chart-title" style="margin-bottom:14px">${prod}</div>${rows}</div>`;
-}
-
-// ── Helpers ───────────────────────────────────────────────────────────────
-function getProductList() {
-  const all = new Set([...Object.keys(allData['262Q']), ...Object.keys(allData['261Q'])]);
-  return PRODUCT_ORDER.filter(p => all.has(p));
-}
-function delta(a, b) { return (a !== null && b !== null) ? a - b : null; }
-function fmt(v) { return v !== null && v !== undefined ? v.toFixed(2)+'%' : '-'; }
-function fmtDelta(d) {
-  if (d === null) return '';
-  return (d > 0 ? '+' : '') + d.toFixed(2) + '%p';
-}
-function fmtDeltaArrow(d) {
-  if (d === null) return '-';
-  const arrow = d > 0 ? '▲' : (d < 0 ? '▼' : '—');
-  return `${arrow} ${Math.abs(d).toFixed(2)}%p`;
-}
-function deltaClass(d) {
-  if (d === null) return 'td-neu';
-  return d > 0 ? 'td-pos' : (d < 0 ? 'td-neg' : 'td-neu');
-}
-
-// ── Tab switch ────────────────────────────────────────────────────────────
-function switchTab(name, btn) {
+// ── Inner tab switch ──────────────────────────────────────────────────────────
+function switchInner(brand, tab, btn) {
   ['trend','delta','compare'].forEach(t => {
-    document.getElementById(`tab-${t}`).style.display = t === name ? '' : 'none';
+    document.getElementById(`inner-${brand}-${t}`).style.display = t===tab ? '' : 'none';
   });
-  document.querySelectorAll('.tab').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll(`#innertabs-${brand} .inner-tab`).forEach(b=>b.classList.remove('active'));
   btn.classList.add('active');
 }
 
-// ── Show/hide ─────────────────────────────────────────────────────────────
-function show(id) { document.getElementById(id).style.display = ''; }
-function hide(id) { document.getElementById(id).style.display = 'none'; }
-function showError(msg) {
-  const el = document.getElementById('error-box');
-  el.innerHTML = msg;
-  show('error-box');
-  hide('loading');
+// ── UI helpers ────────────────────────────────────────────────────────────────
+function showLoading(brand) {
+  document.getElementById(`loading-${brand}`).style.display = 'flex';
+  document.getElementById(`error-${brand}`).style.display = 'none';
+  document.getElementById(`app-${brand}`).style.display = 'none';
+}
+function showError(brand, msg) {
+  document.getElementById(`loading-${brand}`).style.display = 'none';
+  const el = document.getElementById(`error-${brand}`);
+  el.innerHTML = msg; el.style.display = '';
 }
 
-// ── Init ──────────────────────────────────────────────────────────────────
+// ── Formatters ────────────────────────────────────────────────────────────────
+function delta(a, b) { return (a!==null && b!==null && a!==undefined && b!==undefined) ? a-b : null; }
+function fmt(v) { return v!==null && v!==undefined ? v.toFixed(2)+'%' : '-'; }
+function fmtD(d) { if(d===null) return ''; return (d>0?'+':'')+d.toFixed(2)+'%p'; }
+function fmtArr(d) { if(d===null) return '-'; return (d>0?'▲':(d<0?'▼':'—'))+' '+Math.abs(d).toFixed(2)+'%p'; }
+function dcls(d) { if(d===null) return 'td-neu'; return d>0?'td-pos':(d<0?'td-neg':'td-neu'); }
+function pct(v, max) { return max>0 ? ((v||0)/max*100).toFixed(1) : 0; }
+
+// ── Init ──────────────────────────────────────────────────────────────────────
 window.addEventListener('DOMContentLoaded', () => {
-  const saved = getSavedUrl();
-  document.getElementById('sheet-url-input').value = saved;
-  if (saved) loadData();
-  else {
-    hide('loading');
-    show('error-box');
-    document.getElementById('error-box').innerHTML =
-      '시트 URL을 위에 입력하고 적용 버튼을 눌러주세요.<br><small style="color:#888">구글 시트 &gt; 파일 &gt; 웹에 게시 &gt; 쉼표로 구분된 값(.csv) &gt; 게시 &gt; URL 복사</small>';
-  }
-  // 5분마다 자동 새로고침
-  setInterval(() => { if (getSavedUrl()) loadData(); }, 5 * 60 * 1000);
+  BRANDS.forEach(b => {
+    document.getElementById(`url-input-${b}`).value = getUrl(b);
+  });
+  // Load current brand
+  loadBrand('BOH');
+  // Auto-refresh every 5 min
+  setInterval(() => BRANDS.filter(b=>brandData[b]).forEach(b=>loadBrand(b, true)), 5*60*1000);
 });
 </script>
 </body>
