@@ -178,8 +178,15 @@ let currentBrand = 'BOH';
 let brandData = {BOH:null,WM:null,CG:null};
 let charts = {};
 
+// ── 기본 시트 URL (링크 공유 시 자동 로드) ──────────────────────────────────────
+const DEFAULT_URLS = {
+  BOH:'https://docs.google.com/spreadsheets/d/e/2PACX-1vSxHghkM9L-_feMHIjG2ki5I1bvVYONcCQ6HST0nprxSc32Z2oe_4MrMb8jMqJyPZBiAExfIp6xEoOs/pub?gid=0&single=true&output=csv',
+  WM: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSxHghkM9L-_feMHIjG2ki5I1bvVYONcCQ6HST0nprxSc32Z2oe_4MrMb8jMqJyPZBiAExfIp6xEoOs/pub?gid=1580512303&single=true&output=csv',
+  CG: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSxHghkM9L-_feMHIjG2ki5I1bvVYONcCQ6HST0nprxSc32Z2oe_4MrMb8jMqJyPZBiAExfIp6xEoOs/pub?gid=1712106452&single=true&output=csv',
+};
+
 // ── Storage ───────────────────────────────────────────────────────────────────
-const getUrl = b => localStorage.getItem(`furl_${b}`) || '';
+const getUrl = b => localStorage.getItem(`furl_${b}`) || DEFAULT_URLS[b] || '';
 const saveUrl = (b,u) => localStorage.setItem(`furl_${b}`,u);
 
 // ── Brand switch ──────────────────────────────────────────────────────────────
