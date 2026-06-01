@@ -9,549 +9,529 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Pretendard',-apple-system,sans-serif;background:#0d0d14;color:#e2e2ec;min-height:100vh}
+body{font-family:'Pretendard',-apple-system,sans-serif;background:#0b0b10;color:#e2e2ec;min-height:100vh}
 
 /* ── Header ── */
-header{background:#111118;border-bottom:1px solid #222233;padding:14px 28px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
-.logo{display:flex;align-items:center;gap:12px}
-.logo-icon{width:36px;height:36px;border-radius:8px;background:linear-gradient(135deg,#6366f1,#a78bfa);display:flex;align-items:center;justify-content:center;font-size:18px}
-.logo-text h1{font-size:15px;font-weight:700;color:#e2e2ec}
-.logo-text p{font-size:11px;color:#666}
-.header-right{display:flex;align-items:center;gap:16px}
-.last-update{font-size:12px;color:#888}
-.last-update b{color:#e2e2ec}
-.status-dot{width:7px;height:7px;border-radius:50%;background:#34d399;display:inline-block;margin-right:5px;animation:pulse 2s infinite}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
-#btn-reload{padding:7px 14px;background:#6366f1;color:#fff;border:none;border-radius:7px;font-size:12px;font-weight:600;cursor:pointer;transition:background .2s}
-#btn-reload:hover{background:#4f52d4}
+header{background:#111118;border-bottom:1px solid #1e1e2e;padding:13px 28px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;backdrop-filter:blur(10px)}
+.logo{display:flex;align-items:center;gap:10px}
+.logo-icon{width:32px;height:32px;border-radius:8px;background:linear-gradient(135deg,#6366f1,#a78bfa);display:flex;align-items:center;justify-content:center;font-size:16px}
+.logo h1{font-size:14px;font-weight:700;color:#e2e2ec}
+.logo p{font-size:11px;color:#555;margin-top:1px}
+.header-right{display:flex;align-items:center;gap:12px}
+.status-pill{display:flex;align-items:center;gap:6px;background:#16161f;border:1px solid #222233;border-radius:20px;padding:5px 12px;font-size:11px;color:#888}
+.dot{width:6px;height:6px;border-radius:50%;background:#34d399;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.status-pill b{color:#e2e2ec;font-weight:600}
+.btn{padding:6px 14px;border:none;border-radius:7px;font-size:12px;font-weight:600;cursor:pointer;transition:all .2s}
+.btn-reload{background:#1e1e2e;color:#888;border:1px solid #2a2a3a}
+.btn-reload:hover{color:#e2e2ec;border-color:#444}
 
-/* ── Brand tabs (top level) ── */
-.brand-nav{background:#111118;border-bottom:1px solid #222233;padding:0 28px;display:flex;align-items:center;gap:0}
-.brand-tab{padding:13px 28px;font-size:14px;font-weight:700;cursor:pointer;color:#555;border:none;background:transparent;border-bottom:3px solid transparent;transition:all .2s;letter-spacing:.03em}
+/* ── Brand nav ── */
+.brand-nav{background:#111118;border-bottom:1px solid #1e1e2e;padding:0 28px;display:flex;gap:0}
+.brand-tab{padding:12px 26px;font-size:13px;font-weight:700;cursor:pointer;color:#444;border:none;background:transparent;border-bottom:3px solid transparent;transition:all .2s;letter-spacing:.04em}
 .brand-tab:hover{color:#aaa}
-.brand-tab.active{color:#e2e2ec;border-bottom-color:#6366f1}
-.brand-tab.boh.active{border-bottom-color:#6366f1}
-.brand-tab.wm.active{border-bottom-color:#10b981}
-.brand-tab.cg.active{border-bottom-color:#f59e0b}
+.brand-tab.boh.active{color:#818cf8;border-bottom-color:#6366f1}
+.brand-tab.wm.active{color:#34d399;border-bottom-color:#10b981}
+.brand-tab.cg.active{color:#fbbf24;border-bottom-color:#f59e0b}
 
-/* ── Sheet URL banner ── */
-.url-banner{background:#16161f;border-bottom:1px solid #222233;padding:10px 28px;display:flex;align-items:center;gap:10px;font-size:12px}
-.url-banner label{font-weight:700;white-space:nowrap;min-width:60px}
-.url-banner.boh label{color:#818cf8}
-.url-banner.wm label{color:#34d399}
-.url-banner.cg label{color:#fbbf24}
-.url-banner input{flex:1;padding:6px 10px;background:#0d0d1a;border:1px solid #2a2a3a;border-radius:6px;color:#e2e2ec;font-size:12px;font-family:monospace}
-.url-banner button{padding:6px 14px;color:#fff;border:none;border-radius:6px;font-size:12px;font-weight:600;cursor:pointer}
-.url-banner.boh button{background:#6366f1}
-.url-banner.wm button{background:#10b981}
-.url-banner.cg button{background:#f59e0b;color:#000}
-.url-banner .hint{color:#555;font-size:11px;white-space:nowrap}
+/* ── URL banner ── */
+.url-banner{padding:8px 28px;display:flex;align-items:center;gap:8px;font-size:12px;border-bottom:1px solid #1e1e2e;background:#0e0e16}
+.url-label{font-weight:700;white-space:nowrap;font-size:11px;min-width:55px}
+.boh .url-label{color:#818cf8}.wm .url-label{color:#34d399}.cg .url-label{color:#fbbf24}
+.url-banner input{flex:1;padding:5px 10px;background:#16161f;border:1px solid #2a2a3a;border-radius:6px;color:#aaa;font-size:11px;font-family:monospace}
+.url-btn{padding:5px 12px;color:#fff;border:none;border-radius:6px;font-size:11px;font-weight:600;cursor:pointer}
+.boh .url-btn{background:#6366f1}.wm .url-btn{background:#10b981}.cg .url-btn{background:#f59e0b;color:#000}
+.url-hint{color:#444;font-size:10px;white-space:nowrap}
 
 /* ── Main ── */
-main{padding:24px 28px;max-width:1600px;margin:0 auto}
-
-/* ── Summary cards ── */
-.summary-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin-bottom:28px}
-.card{background:#16161f;border:1px solid #222233;border-radius:12px;padding:16px 18px;transition:border-color .2s}
-.card:hover{border-color:#6366f140}
-.card-product{font-size:12px;font-weight:700;color:#888;margin-bottom:6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.card-date{font-size:10px;color:#444;margin-bottom:10px}
-.card-row{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:5px}
-.card-label{font-size:11px;color:#555}
-.card-val{font-size:15px;font-weight:700}
-.card-delta{font-size:11px;font-weight:600;margin-left:5px}
+main{padding:20px 28px;max-width:1600px;margin:0 auto}
 
 /* ── Inner tabs ── */
-.inner-tabs{display:flex;gap:4px;margin-bottom:20px;background:#16161f;border:1px solid #222233;border-radius:10px;padding:4px;width:fit-content}
-.inner-tab{padding:7px 18px;border-radius:7px;font-size:13px;font-weight:600;cursor:pointer;color:#666;transition:all .2s;border:none;background:transparent}
+.inner-tabs{display:flex;gap:3px;margin-bottom:20px;background:#16161f;border:1px solid #1e1e2e;border-radius:9px;padding:3px;width:fit-content}
+.inner-tab{padding:6px 16px;border-radius:6px;font-size:12px;font-weight:600;cursor:pointer;color:#555;transition:all .2s;border:none;background:transparent}
 .inner-tab.active{background:#6366f1;color:#fff}
-.wm-active .inner-tab.active{background:#10b981}
-.cg-active .inner-tab.active{background:#f59e0b;color:#000}
 
-/* ── Section title ── */
-.section-title{font-size:11px;font-weight:700;color:#555;text-transform:uppercase;letter-spacing:.08em;margin-bottom:14px}
+/* ── Section label ── */
+.sec-label{font-size:10px;font-weight:700;color:#444;text-transform:uppercase;letter-spacing:.1em;margin-bottom:12px}
 
-/* ── Charts ── */
-.charts-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(480px,1fr));gap:18px;margin-bottom:28px}
-.chart-card{background:#16161f;border:1px solid #222233;border-radius:12px;padding:18px}
-.chart-title{font-size:14px;font-weight:700;margin-bottom:14px}
-.chart-wrap{position:relative;height:200px}
+/* ═══════════════════════════════════
+   FUNNEL CARDS (snapshot)
+═══════════════════════════════════ */
+.funnel-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px;margin-bottom:28px}
 
-/* ── Tables ── */
-.table-wrap{overflow-x:auto;margin-bottom:28px}
-table{width:100%;border-collapse:collapse;font-size:13px}
-thead th{background:#1a1a24;color:#666;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;padding:10px 14px;text-align:left;border-bottom:1px solid #222233;white-space:nowrap}
-tbody tr{border-bottom:1px solid #1a1a24;transition:background .15s}
-tbody tr:hover{background:#1a1a2a}
-tbody td{padding:10px 14px;white-space:nowrap}
-.td-product{font-weight:700;color:#c4b5fd}
-.td-pos{color:#34d399;font-weight:700}
-.td-neg{color:#f87171;font-weight:700}
-.td-neu{color:#555}
-.card-count{font-size:11px;color:#555;margin-top:1px;margin-bottom:2px}
+.funnel-card{background:#13131c;border:1px solid #1e1e2e;border-radius:14px;padding:18px 20px;transition:border-color .2s}
+.funnel-card:hover{border-color:#2e2e4a}
 
-/* ── Bars ── */
-.cmp-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(480px,1fr));gap:18px}
-.bar-wrap{margin-bottom:14px}
-.bar-label{display:flex;justify-content:space-between;font-size:11px;color:#666;margin-bottom:3px}
-.bar-track{height:7px;background:#1e1e2a;border-radius:4px;overflow:hidden}
-.bar-fill{height:100%;border-radius:4px;transition:width .5s}
+.fc-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px}
+.fc-name{font-size:14px;font-weight:700;color:#c4b5fd}
+.fc-date{font-size:10px;color:#444;margin-top:3px}
+.fc-inflow{font-size:11px;color:#555;font-weight:600}
 
-/* ── Loading / Error ── */
-.brand-panel{display:none}
-.brand-panel.active{display:block}
-#global-loading{display:flex;flex-direction:column;align-items:center;justify-content:center;height:300px;gap:16px}
-.spinner{width:36px;height:36px;border:3px solid #222;border-top-color:#6366f1;border-radius:50%;animation:spin .8s linear infinite}
-@keyframes spin{to{transform:rotate(360deg)}}
-.error-box{background:#1f1010;border:1px solid #5a2020;border-radius:10px;padding:16px 20px;margin:20px 0;color:#f87171;font-size:13px;line-height:1.6}
-.loading-inline{display:flex;align-items:center;gap:10px;padding:40px 0;color:#555;font-size:13px}
-.spinner-sm{width:20px;height:20px;border:2px solid #222;border-top-color:#6366f1;border-radius:50%;animation:spin .8s linear infinite}
+/* funnel stages */
+.funnel-stages{display:flex;flex-direction:column;gap:8px}
+.stage{display:grid;grid-template-columns:58px 1fr 80px;align-items:center;gap:10px}
+.stage-label{font-size:11px;color:#666;font-weight:600;white-space:nowrap}
+.stage-bar-wrap{position:relative;height:20px;background:#1a1a26;border-radius:5px;overflow:hidden}
+.stage-bar{height:100%;border-radius:5px;transition:width .6s cubic-bezier(.4,0,.2,1);position:relative}
+.stage-bar::after{content:attr(data-count);position:absolute;right:6px;top:50%;transform:translateY(-50%);font-size:10px;color:rgba(255,255,255,.7);font-weight:600;white-space:nowrap}
+.stage-right{text-align:right}
+.stage-rate{font-size:14px;font-weight:700;line-height:1.1}
+.stage-delta{font-size:10px;font-weight:700;margin-top:1px}
+
+/* colors */
+.bar-inflow{background:linear-gradient(90deg,#334155,#475569)}
+.bar-cart{background:linear-gradient(90deg,#4338ca,#6366f1)}
+.bar-buy{background:linear-gradient(90deg,#7c3aed,#a78bfa)}
+.delta-pos{color:#34d399}.delta-neg{color:#f87171}.delta-neu{color:#555}
+
+/* ═══════════════════════════════════
+   DELTA CARDS
+═══════════════════════════════════ */
+.delta-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px;margin-bottom:28px}
+
+.delta-card{background:#13131c;border:1px solid #1e1e2e;border-radius:14px;padding:18px 20px}
+.dc-name{font-size:13px;font-weight:700;color:#c4b5fd;margin-bottom:4px}
+.dc-dates{font-size:10px;color:#444;margin-bottom:14px}
+.dc-metrics{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.dc-metric{background:#0f0f18;border-radius:10px;padding:12px 14px}
+.dc-metric-label{font-size:10px;color:#555;font-weight:700;text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px}
+.dc-metric-val{font-size:22px;font-weight:800;line-height:1;margin-bottom:4px}
+.dc-metric-count{font-size:11px;color:#555;margin-bottom:6px}
+.dc-delta-badge{display:inline-flex;align-items:center;gap:3px;padding:3px 8px;border-radius:20px;font-size:11px;font-weight:700}
+.badge-pos{background:#0d2e20;color:#34d399}
+.badge-neg{background:#2e0d0d;color:#f87171}
+.badge-neu{background:#1a1a24;color:#555}
+.dc-prev{font-size:10px;color:#444;margin-top:4px}
+
+/* ═══════════════════════════════════
+   TREND CHARTS
+═══════════════════════════════════ */
+.trend-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(480px,1fr));gap:14px;margin-bottom:28px}
+.trend-card{background:#13131c;border:1px solid #1e1e2e;border-radius:14px;padding:18px 20px}
+.trend-card .tc-title{font-size:13px;font-weight:700;color:#c4b5fd;margin-bottom:14px}
+.chart-wrap{position:relative;height:210px}
+
+/* ═══════════════════════════════════
+   COMPARE (grouped bar charts)
+═══════════════════════════════════ */
+.cmp-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(480px,1fr));gap:14px}
+.cmp-card{background:#13131c;border:1px solid #1e1e2e;border-radius:14px;padding:18px 20px}
+.cmp-card .cc-title{font-size:13px;font-weight:700;color:#c4b5fd;margin-bottom:4px}
+.cmp-card .cc-sub{font-size:10px;color:#444;margin-bottom:14px}
+.cmp-chart-wrap{position:relative;height:220px}
+
+/* ═══════════════════════════════════
+   States
+═══════════════════════════════════ */
+.brand-panel{display:none}.brand-panel.active{display:block}
+.loading-state{display:flex;align-items:center;gap:10px;padding:60px 0;color:#444;font-size:13px;justify-content:center}
+.spin{width:18px;height:18px;border:2px solid #222;border-top-color:#6366f1;border-radius:50%;animation:sp .8s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+.error-state{background:#180f0f;border:1px solid #3a1a1a;border-radius:12px;padding:16px 20px;color:#f87171;font-size:13px;line-height:1.7;margin:20px 0}
 </style>
 </head>
 <body>
 
-<!-- Header -->
 <header>
   <div class="logo">
     <div class="logo-icon">📈</div>
-    <div class="logo-text">
+    <div>
       <h1>퍼널 전환율 대시보드</h1>
-      <p>261Q vs 262Q · 브랜드별 제품 퍼널 모니터링</p>
+      <p>261Q vs 262Q · 브랜드별 제품 모니터링</p>
     </div>
   </div>
   <div class="header-right">
-    <span class="last-update"><span class="status-dot"></span>최종 업데이트: <b id="last-updated">-</b></span>
-    <button id="btn-reload" onclick="reloadCurrent()">↻ 새로고침</button>
+    <div class="status-pill"><span class="dot"></span>업데이트: <b id="last-updated">-</b></div>
+    <button class="btn btn-reload" onclick="reloadCurrent()">↻ 새로고침</button>
   </div>
 </header>
 
-<!-- Brand tabs -->
 <nav class="brand-nav">
   <button class="brand-tab boh active" onclick="switchBrand('BOH',this)">BOH</button>
-  <button class="brand-tab wm" onclick="switchBrand('WM',this)">WM</button>
-  <button class="brand-tab cg" onclick="switchBrand('CG',this)">CG</button>
+  <button class="brand-tab wm"  onclick="switchBrand('WM',this)">WM</button>
+  <button class="brand-tab cg"  onclick="switchBrand('CG',this)">CG</button>
 </nav>
 
-<!-- URL banners (one per brand) -->
 <div id="url-BOH" class="url-banner boh">
-  <label>BOH 시트</label>
-  <input id="url-input-BOH" type="text" placeholder="BOH 시트 웹 게시 CSV URL">
-  <button onclick="applyUrl('BOH')">적용</button>
-  <span class="hint">파일 &gt; 웹에 게시 &gt; CSV</span>
+  <span class="url-label">BOH</span>
+  <input id="url-input-BOH" placeholder="구글 시트 웹 게시 CSV URL">
+  <button class="url-btn" onclick="applyUrl('BOH')">적용</button>
+  <span class="url-hint">파일 › 웹에 게시 › CSV 탭 선택 › 게시</span>
 </div>
 <div id="url-WM" class="url-banner wm" style="display:none">
-  <label>WM 시트</label>
-  <input id="url-input-WM" type="text" placeholder="WM 시트 웹 게시 CSV URL">
-  <button onclick="applyUrl('WM')">적용</button>
-  <span class="hint">파일 &gt; 웹에 게시 &gt; CSV</span>
+  <span class="url-label">WM</span>
+  <input id="url-input-WM" placeholder="구글 시트 웹 게시 CSV URL">
+  <button class="url-btn" onclick="applyUrl('WM')">적용</button>
+  <span class="url-hint">파일 › 웹에 게시 › CSV 탭 선택 › 게시</span>
 </div>
 <div id="url-CG" class="url-banner cg" style="display:none">
-  <label>CG 시트</label>
-  <input id="url-input-CG" type="text" placeholder="CG 시트 웹 게시 CSV URL">
-  <button onclick="applyUrl('CG')">적용</button>
-  <span class="hint">파일 &gt; 웹에 게시 &gt; CSV</span>
+  <span class="url-label">CG</span>
+  <input id="url-input-CG" placeholder="구글 시트 웹 게시 CSV URL">
+  <button class="url-btn" onclick="applyUrl('CG')">적용</button>
+  <span class="url-hint">파일 › 웹에 게시 › CSV 탭 선택 › 게시</span>
 </div>
 
 <main>
-  <!-- BOH Panel -->
-  <div id="panel-BOH" class="brand-panel active">
-    <div id="loading-BOH" class="loading-inline"><div class="spinner-sm"></div>데이터 로딩 중...</div>
-    <div id="error-BOH" class="error-box" style="display:none"></div>
-    <div id="app-BOH" style="display:none">
-      <div class="section-title">최신 스냅샷 (262Q · 직전일 대비)</div>
-      <div class="summary-grid" id="summary-BOH"></div>
-      <div class="inner-tabs" id="innertabs-BOH">
-        <button class="inner-tab active" onclick="switchInner('BOH','trend',this)">📊 트렌드</button>
-        <button class="inner-tab" onclick="switchInner('BOH','delta',this)">📋 직전일 델타</button>
-        <button class="inner-tab" onclick="switchInner('BOH','compare',this)">🔀 261Q 비교</button>
-      </div>
-      <div id="inner-BOH-trend"><div class="section-title">일별 전환율 (실선=262Q · 점선=261Q)</div><div class="charts-grid" id="charts-BOH"></div></div>
-      <div id="inner-BOH-delta" style="display:none"><div class="section-title">262Q 직전일 대비 변동</div><div class="table-wrap"><table><thead><tr><th>제품</th><th>기준일</th><th>직전일</th><th>유입</th><th>🛒 장바구니</th><th>장바구니율(현)</th><th>장바구니율(전)</th><th>🛒 변동</th><th>💳 구매</th><th>구매율(현)</th><th>구매율(전)</th><th>💳 변동</th></tr></thead><tbody id="delta-BOH"></tbody></table></div></div>
-      <div id="inner-BOH-compare" style="display:none"><div class="section-title">동일 영업일 기준 비교</div><div class="table-wrap"><table><thead><tr><th>제품</th><th>영업일</th><th>262Q 날짜</th><th>261Q 날짜</th><th>🛒 장바구니(262Q)</th><th>장바구니율(262Q)</th><th>🛒 장바구니(261Q)</th><th>장바구니율(261Q)</th><th>🛒 차이</th><th>💳 구매(262Q)</th><th>구매율(262Q)</th><th>💳 구매(261Q)</th><th>구매율(261Q)</th><th>💳 차이</th></tr></thead><tbody id="cmp-BOH"></tbody></table></div><div class="section-title" style="margin-top:20px">바 차트 비교</div><div class="cmp-grid" id="bars-BOH"></div></div>
-    </div>
-  </div>
-
-  <!-- WM Panel -->
-  <div id="panel-WM" class="brand-panel">
-    <div id="loading-WM" class="loading-inline"><div class="spinner-sm"></div>데이터 로딩 중...</div>
-    <div id="error-WM" class="error-box" style="display:none"></div>
-    <div id="app-WM" style="display:none">
-      <div class="section-title">최신 스냅샷 (262Q · 직전일 대비)</div>
-      <div class="summary-grid" id="summary-WM"></div>
-      <div class="inner-tabs" id="innertabs-WM">
-        <button class="inner-tab active" onclick="switchInner('WM','trend',this)">📊 트렌드</button>
-        <button class="inner-tab" onclick="switchInner('WM','delta',this)">📋 직전일 델타</button>
-        <button class="inner-tab" onclick="switchInner('WM','compare',this)">🔀 261Q 비교</button>
-      </div>
-      <div id="inner-WM-trend"><div class="section-title">일별 전환율 (실선=262Q · 점선=261Q)</div><div class="charts-grid" id="charts-WM"></div></div>
-      <div id="inner-WM-delta" style="display:none"><div class="section-title">262Q 직전일 대비 변동</div><div class="table-wrap"><table><thead><tr><th>제품</th><th>기준일</th><th>직전일</th><th>유입</th><th>🛒 장바구니</th><th>장바구니율(현)</th><th>장바구니율(전)</th><th>🛒 변동</th><th>💳 구매</th><th>구매율(현)</th><th>구매율(전)</th><th>💳 변동</th></tr></thead><tbody id="delta-WM"></tbody></table></div></div>
-      <div id="inner-WM-compare" style="display:none"><div class="section-title">동일 영업일 기준 비교</div><div class="table-wrap"><table><thead><tr><th>제품</th><th>영업일</th><th>262Q 날짜</th><th>261Q 날짜</th><th>🛒 장바구니(262Q)</th><th>장바구니율(262Q)</th><th>🛒 장바구니(261Q)</th><th>장바구니율(261Q)</th><th>🛒 차이</th><th>💳 구매(262Q)</th><th>구매율(262Q)</th><th>💳 구매(261Q)</th><th>구매율(261Q)</th><th>💳 차이</th></tr></thead><tbody id="cmp-WM"></tbody></table></div><div class="section-title" style="margin-top:20px">바 차트 비교</div><div class="cmp-grid" id="bars-WM"></div></div>
-    </div>
-  </div>
-
-  <!-- CG Panel -->
-  <div id="panel-CG" class="brand-panel">
-    <div id="loading-CG" class="loading-inline"><div class="spinner-sm"></div>데이터 로딩 중...</div>
-    <div id="error-CG" class="error-box" style="display:none"></div>
-    <div id="app-CG" style="display:none">
-      <div class="section-title">최신 스냅샷 (262Q · 직전일 대비)</div>
-      <div class="summary-grid" id="summary-CG"></div>
-      <div class="inner-tabs" id="innertabs-CG">
-        <button class="inner-tab active" onclick="switchInner('CG','trend',this)">📊 트렌드</button>
-        <button class="inner-tab" onclick="switchInner('CG','delta',this)">📋 직전일 델타</button>
-        <button class="inner-tab" onclick="switchInner('CG','compare',this)">🔀 261Q 비교</button>
-      </div>
-      <div id="inner-CG-trend"><div class="section-title">일별 전환율 (실선=262Q · 점선=261Q)</div><div class="charts-grid" id="charts-CG"></div></div>
-      <div id="inner-CG-delta" style="display:none"><div class="section-title">262Q 직전일 대비 변동</div><div class="table-wrap"><table><thead><tr><th>제품</th><th>기준일</th><th>직전일</th><th>유입</th><th>🛒 장바구니</th><th>장바구니율(현)</th><th>장바구니율(전)</th><th>🛒 변동</th><th>💳 구매</th><th>구매율(현)</th><th>구매율(전)</th><th>💳 변동</th></tr></thead><tbody id="delta-CG"></tbody></table></div></div>
-      <div id="inner-CG-compare" style="display:none"><div class="section-title">동일 영업일 기준 비교</div><div class="table-wrap"><table><thead><tr><th>제품</th><th>영업일</th><th>262Q 날짜</th><th>261Q 날짜</th><th>🛒 장바구니(262Q)</th><th>장바구니율(262Q)</th><th>🛒 장바구니(261Q)</th><th>장바구니율(261Q)</th><th>🛒 차이</th><th>💳 구매(262Q)</th><th>구매율(262Q)</th><th>💳 구매(261Q)</th><th>구매율(261Q)</th><th>💳 차이</th></tr></thead><tbody id="cmp-CG"></tbody></table></div><div class="section-title" style="margin-top:20px">바 차트 비교</div><div class="cmp-grid" id="bars-CG"></div></div>
-    </div>
-  </div>
+  <!-- Panels generated per brand -->
+  <div id="panel-BOH" class="brand-panel active"></div>
+  <div id="panel-WM"  class="brand-panel"></div>
+  <div id="panel-CG"  class="brand-panel"></div>
 </main>
 
 <script>
-// ── Constants ───────────────────────────────────────────────────────────────
-const BRANDS = ['BOH', 'WM', 'CG'];
-const BRAND_COLORS = {
-  BOH: { accent: '#6366f1', accent2: '#a78bfa' },
-  WM:  { accent: '#10b981', accent2: '#34d399' },
-  CG:  { accent: '#f59e0b', accent2: '#fbbf24' },
-};
-const Q262_COLOR = { cart: '#6366f1', buy: '#a78bfa' };
-const Q261_COLOR = { cart: '#f97316', buy: '#fb923c' };
+const BRANDS = ['BOH','WM','CG'];
+const COL_262 = {date:1,product:2,inflow:3,cart:4,buy:5,cartRate:6,buyRate:7};
+const COL_261 = {date:10,product:11,inflow:12,cart:13,buy:14,cartRate:15,buyRate:16};
+const C262 = {cart:'#6366f1',buy:'#a78bfa'};
+const C261 = {cart:'#f97316',buy:'#fb923c'};
 
-const COL_262 = { code:0, date:1, product:2, inflow:3, cart:4, buy:5, cartRate:6, buyRate:7 };
-const COL_261 = { code:9, date:10, product:11, inflow:12, cart:13, buy:14, cartRate:15, buyRate:16 };
-
-// State
 let currentBrand = 'BOH';
-let brandData = { BOH: null, WM: null, CG: null }; // { '262Q':{prod:[rows]}, '261Q':{...} }
-let chartInstances = {};
+let brandData = {BOH:null,WM:null,CG:null};
+let charts = {};
 
-// ── Storage ──────────────────────────────────────────────────────────────────
-function getUrl(brand) { return localStorage.getItem(`funnel_url_${brand}`) || ''; }
-function saveUrl(brand, url) { localStorage.setItem(`funnel_url_${brand}`, url); }
+// ── Storage ───────────────────────────────────────────────────────────────────
+const getUrl = b => localStorage.getItem(`furl_${b}`) || '';
+const saveUrl = (b,u) => localStorage.setItem(`furl_${b}`,u);
 
-// ── Brand switching ───────────────────────────────────────────────────────────
+// ── Brand switch ──────────────────────────────────────────────────────────────
 function switchBrand(brand, btn) {
   currentBrand = brand;
   BRANDS.forEach(b => {
-    document.getElementById(`panel-${b}`).classList.toggle('active', b === brand);
-    document.getElementById(`url-${b}`).style.display = b === brand ? '' : 'none';
+    document.getElementById(`panel-${b}`).classList.toggle('active', b===brand);
+    document.getElementById(`url-${b}`).style.display = b===brand ? '' : 'none';
   });
-  document.querySelectorAll('.brand-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.brand-tab').forEach(t=>t.classList.remove('active'));
   btn.classList.add('active');
-  // Load if not yet loaded
   if (!brandData[brand]) loadBrand(brand);
 }
-
 function reloadCurrent() { loadBrand(currentBrand, true); }
-
 function applyUrl(brand) {
-  const url = document.getElementById(`url-input-${brand}`).value.trim();
-  if (!url) return alert('URL을 입력해주세요');
-  saveUrl(brand, url);
+  const u = document.getElementById(`url-input-${brand}`).value.trim();
+  if (!u) return alert('URL을 입력해주세요');
+  saveUrl(brand, u);
   loadBrand(brand, true);
 }
 
-// ── Data loading ──────────────────────────────────────────────────────────────
-async function loadBrand(brand, force = false) {
-  if (!force && brandData[brand]) return; // already loaded
-
+// ── Load ──────────────────────────────────────────────────────────────────────
+async function loadBrand(brand, force=false) {
+  if (!force && brandData[brand]) return;
   const url = getUrl(brand);
   document.getElementById(`url-input-${brand}`).value = url;
-
-  showLoading(brand);
-
-  if (!url) {
-    showError(brand, `${brand} 시트 URL을 입력하고 적용 버튼을 눌러주세요.<br><small style="color:#666">구글 시트 &gt; 파일 &gt; 웹에 게시 &gt; CSV &gt; URL 복사</small>`);
-    return;
-  }
+  setPanelState(brand,'loading');
+  if (!url) { setPanelState(brand,'error',`${brand} 시트 URL을 위에 입력해주세요.<br><small>파일 › 웹에 게시 › CSV › 게시 › URL 복사</small>`); return; }
 
   let text;
-  const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`;
   try {
-    const r = await fetch(proxyUrl, { cache: 'no-store' });
-    if (!r.ok) throw new Error(`HTTP ${r.status}`);
+    const r = await fetch(`https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`,{cache:'no-store'});
+    if (!r.ok) throw 0;
     text = await r.text();
   } catch {
-    try {
-      const r2 = await fetch(url, { cache: 'no-store' });
-      if (!r2.ok) throw new Error(`HTTP ${r2.status}`);
-      text = await r2.text();
-    } catch(e) {
-      showError(brand, `로드 실패: ${e.message}<br>시트가 웹에 게시되어 있는지 확인해주세요.`);
-      return;
-    }
+    try { const r2=await fetch(url,{cache:'no-store'}); text=await r2.text(); }
+    catch(e){ setPanelState(brand,'error',`로드 실패: 시트가 공개 게시되어 있는지 확인하세요.`); return; }
   }
 
-  brandData[brand] = parseSheetData(parseCSV(text));
-  renderBrand(brand);
-
-  const now = new Date();
-  document.getElementById('last-updated').textContent =
-    `${now.getMonth()+1}/${now.getDate()} ${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}`;
+  brandData[brand] = parseSheet(parseCSV(text));
+  render(brand);
+  const t=new Date();
+  document.getElementById('last-updated').textContent=
+    `${t.getMonth()+1}/${t.getDate()} ${pad2(t.getHours())}:${pad2(t.getMinutes())}`;
 }
 
-// ── CSV / Parse ───────────────────────────────────────────────────────────────
+// ── Parse ─────────────────────────────────────────────────────────────────────
 function parseCSV(text) {
-  const rows = [];
-  for (const line of text.split(/\r?\n/)) {
-    if (!line.trim()) continue;
-    const cols = []; let cur = '', inQ = false;
-    for (let i = 0; i < line.length; i++) {
-      const c = line[i];
-      if (c === '"') { inQ = !inQ; continue; }
-      if (c === ',' && !inQ) { cols.push(cur.trim()); cur = ''; continue; }
-      cur += c;
+  return text.split(/\r?\n/).filter(l=>l.trim()).map(line=>{
+    const cols=[]; let cur='',inQ=false;
+    for(let i=0;i<line.length;i++){
+      const c=line[i];
+      if(c==='"'){inQ=!inQ;continue;}
+      if(c===','&&!inQ){cols.push(cur.trim());cur='';continue;}
+      cur+=c;
     }
-    cols.push(cur.trim());
-    rows.push(cols);
-  }
-  return rows;
+    cols.push(cur.trim()); return cols;
+  });
 }
+const parsePct = v => { if(!v||v==='-') return null; const n=parseFloat(v.replace('%','').replace(',','')); return isNaN(n)?null:n; };
+const parseNum = v => { if(!v||v==='-') return null; const n=parseFloat(v.replace(/,/g,'')); return isNaN(n)?null:n; };
 
-function parsePct(v) {
-  if (!v || v === '-') return null;
-  const n = parseFloat(v.replace('%','').replace(',',''));
-  return isNaN(n) ? null : n;
-}
-function parseNum(v) {
-  if (!v || v === '-') return null;
-  const n = parseFloat(v.replace(/,/g,''));
-  return isNaN(n) ? null : n;
-}
-function fmtNum(v) {
-  if (v === null || v === undefined) return '-';
-  return Math.round(v).toLocaleString();
-}
-
-function parseSheetData(rows) {
-  function extract(cm) {
-    const data = {};
-    for (let i = 1; i < rows.length; i++) {
-      const r = rows[i];
-      if (!r || r.length < cm.buyRate + 1) continue;
-      const prod = r[cm.product]?.trim();
-      const date = r[cm.date]?.trim();
-      if (!prod || !date || prod === '제품' || date === 'date' || date === '') continue;
-      if (!data[prod]) data[prod] = [];
-      data[prod].push({
-        date,
-        inflow:   parseNum(r[cm.inflow]),
-        cart:     parseNum(r[cm.cart]),
-        buy:      parseNum(r[cm.buy]),
-        cartRate: parsePct(r[cm.cartRate]),
-        buyRate:  parsePct(r[cm.buyRate]),
-      });
+function parseSheet(rows) {
+  function ext(cm) {
+    const d={};
+    for(let i=1;i<rows.length;i++){
+      const r=rows[i];
+      if(!r||r.length<cm.buyRate+1) continue;
+      const prod=r[cm.product]?.trim(), date=r[cm.date]?.trim();
+      if(!prod||!date||prod==='제품'||date==='date'||date==='') continue;
+      if(!d[prod]) d[prod]=[];
+      d[prod].push({date, inflow:parseNum(r[cm.inflow]), cart:parseNum(r[cm.cart]), buy:parseNum(r[cm.buy]), cartRate:parsePct(r[cm.cartRate]), buyRate:parsePct(r[cm.buyRate])});
     }
-    const sortKey = d => { const [m,rest] = d.split('월'); return parseInt(m)*100 + parseInt(rest?.replace('일','') || 0); };
-    Object.values(data).forEach(arr => arr.sort((a,b) => sortKey(a.date) - sortKey(b.date)));
-    return data;
+    const sk = d => { const[m,rest]=d.split('월'); return parseInt(m)*100+parseInt(rest?.replace('일','')||0); };
+    Object.values(d).forEach(a=>a.sort((a,b)=>sk(a.date)-sk(b.date)));
+    return d;
   }
-  return { '262Q': extract(COL_262), '261Q': extract(COL_261) };
+  return {'262Q':ext(COL_262),'261Q':ext(COL_261)};
 }
 
 // ── Render ────────────────────────────────────────────────────────────────────
-function renderBrand(brand) {
+function render(brand) {
   const data = brandData[brand];
-  const products = [...new Set([...Object.keys(data['262Q']), ...Object.keys(data['261Q'])])];
+  const prods = [...new Set([...Object.keys(data['262Q']),...Object.keys(data['261Q'])])];
+  const panel = document.getElementById(`panel-${brand}`);
 
-  renderSummary(brand, data, products);
-  renderCharts(brand, data, products);
-  renderDeltaTable(brand, data, products);
-  renderCmpTable(brand, data, products);
+  panel.innerHTML = buildPanelHTML(brand);
 
-  document.getElementById(`loading-${brand}`).style.display = 'none';
-  document.getElementById(`error-${brand}`).style.display = 'none';
-  document.getElementById(`app-${brand}`).style.display = '';
+  // destroy old charts
+  Object.keys(charts).filter(k=>k.startsWith(brand+'_')).forEach(k=>{charts[k].destroy();delete charts[k];});
+
+  renderFunnelCards(brand, data, prods);
+  renderDeltaCards(brand, data, prods);
+  renderTrendCharts(brand, data, prods);
+  renderCmpCharts(brand, data, prods);
 }
 
-function renderSummary(brand, data, products) {
-  const grid = document.getElementById(`summary-${brand}`);
-  grid.innerHTML = '';
-  products.forEach(prod => {
+function buildPanelHTML(brand) {
+  const tabsFn = (b) => `
+    <div class="inner-tabs" id="itabs-${b}">
+      <button class="inner-tab active" onclick="switchInner('${b}','snapshot',this)">⬡ 스냅샷</button>
+      <button class="inner-tab" onclick="switchInner('${b}','delta',this)">↕ 직전일 변동</button>
+      <button class="inner-tab" onclick="switchInner('${b}','trend',this)">📈 트렌드</button>
+      <button class="inner-tab" onclick="switchInner('${b}','compare',this)">⊞ 261Q 비교</button>
+    </div>`;
+  return `
+    <div id="inner-${brand}-snapshot">
+      <div class="sec-label">최신 실적 스냅샷 · 262Q (직전일 대비)</div>
+      <div class="funnel-grid" id="funnel-${brand}"></div>
+    </div>
+    <div id="inner-${brand}-delta" style="display:none">
+      <div class="sec-label">262Q 직전일 대비 변동</div>
+      <div class="delta-grid" id="dcards-${brand}"></div>
+    </div>
+    <div id="inner-${brand}-trend" style="display:none">
+      <div class="sec-label">일별 전환율 추이 · 실선=262Q 점선=261Q</div>
+      <div class="trend-grid" id="trend-${brand}"></div>
+    </div>
+    <div id="inner-${brand}-compare" style="display:none">
+      <div class="sec-label">동일 영업일 기준 · 262Q vs 261Q</div>
+      <div class="cmp-grid" id="cmp-${brand}"></div>
+    </div>
+    ${tabsFn(brand)}`;
+}
+
+// ── Funnel Cards ──────────────────────────────────────────────────────────────
+function renderFunnelCards(brand, data, prods) {
+  const grid = document.getElementById(`funnel-${brand}`);
+  prods.forEach(prod => {
     const rows = data['262Q'][prod] || [];
     if (!rows.length) return;
     const last = rows[rows.length-1];
-    const prev = rows.length >= 2 ? rows[rows.length-2] : null;
-    const cD = delta(last.cartRate, prev?.cartRate);
-    const bD = delta(last.buyRate,  prev?.buyRate);
-    grid.insertAdjacentHTML('beforeend', `
-      <div class="card">
-        <div class="card-product" title="${prod}">${prod}</div>
-        <div class="card-date">${last.date} · 유입 ${fmtNum(last.inflow)}</div>
-        <div class="card-row">
-          <span class="card-label">🛒 장바구니</span>
-          <span class="card-val">${fmt(last.cartRate)}<span class="card-delta ${dcls(cD)}">${fmtD(cD)}</span></span>
+    const prev = rows.length>=2 ? rows[rows.length-2] : null;
+    const inflow = last.inflow || 1;
+    const cartW = Math.min(100, (last.cart||0)/inflow*100);
+    const buyW  = Math.min(100, (last.buy||0)/inflow*100);
+    const cD = dlt(last.cartRate, prev?.cartRate);
+    const bD = dlt(last.buyRate,  prev?.buyRate);
+
+    grid.insertAdjacentHTML('beforeend',`
+      <div class="funnel-card">
+        <div class="fc-header">
+          <div>
+            <div class="fc-name">${prod}</div>
+            <div class="fc-date">${last.date}</div>
+          </div>
+          <div class="fc-inflow" style="text-align:right">유입<br><span style="font-size:15px;font-weight:700;color:#888">${n(last.inflow)}</span></div>
         </div>
-        <div class="card-count">${fmtNum(last.cart)}건</div>
-        <div class="card-row" style="margin-top:8px">
-          <span class="card-label">💳 구매</span>
-          <span class="card-val">${fmt(last.buyRate)}<span class="card-delta ${dcls(bD)}">${fmtD(bD)}</span></span>
+        <div class="funnel-stages">
+          <div class="stage">
+            <div class="stage-label" style="color:#94a3b8">유입</div>
+            <div class="stage-bar-wrap">
+              <div class="stage-bar bar-inflow" style="width:100%" data-count="${n(last.inflow)}"></div>
+            </div>
+            <div class="stage-right">
+              <div class="stage-rate" style="color:#94a3b8">100%</div>
+            </div>
+          </div>
+          <div class="stage">
+            <div class="stage-label" style="color:#818cf8">장바구니</div>
+            <div class="stage-bar-wrap">
+              <div class="stage-bar bar-cart" style="width:${cartW.toFixed(1)}%" data-count="${n(last.cart)}"></div>
+            </div>
+            <div class="stage-right">
+              <div class="stage-rate" style="color:#818cf8">${f(last.cartRate)}</div>
+              <div class="stage-delta ${dcls(cD)}">${fD(cD)}</div>
+            </div>
+          </div>
+          <div class="stage">
+            <div class="stage-label" style="color:#a78bfa">구매</div>
+            <div class="stage-bar-wrap">
+              <div class="stage-bar bar-buy" style="width:${buyW.toFixed(1)}%" data-count="${n(last.buy)}"></div>
+            </div>
+            <div class="stage-right">
+              <div class="stage-rate" style="color:#a78bfa">${f(last.buyRate)}</div>
+              <div class="stage-delta ${dcls(bD)}">${fD(bD)}</div>
+            </div>
+          </div>
         </div>
-        <div class="card-count">${fmtNum(last.buy)}건</div>
       </div>`);
   });
 }
 
-function renderCharts(brand, data, products) {
-  const grid = document.getElementById(`charts-${brand}`);
-  grid.innerHTML = '';
-  // destroy old charts for this brand
-  Object.keys(chartInstances).filter(k=>k.startsWith(brand+'_')).forEach(k=>{
-    chartInstances[k].destroy(); delete chartInstances[k];
+// ── Delta Cards ───────────────────────────────────────────────────────────────
+function renderDeltaCards(brand, data, prods) {
+  const grid = document.getElementById(`dcards-${brand}`);
+  prods.forEach(prod => {
+    const rows = data['262Q'][prod] || [];
+    if (rows.length < 2) return;
+    const last = rows[rows.length-1], prev = rows[rows.length-2];
+    const cD = dlt(last.cartRate, prev.cartRate);
+    const bD = dlt(last.buyRate,  prev.buyRate);
+
+    grid.insertAdjacentHTML('beforeend',`
+      <div class="delta-card">
+        <div class="dc-name">${prod}</div>
+        <div class="dc-dates">${prev.date} → <b style="color:#888">${last.date}</b></div>
+        <div class="dc-metrics">
+          <div class="dc-metric">
+            <div class="dc-metric-label">🛒 장바구니 전환율</div>
+            <div class="dc-metric-val" style="color:#818cf8">${f(last.cartRate)}</div>
+            <div class="dc-metric-count">${n(last.cart)}건</div>
+            <span class="dc-delta-badge ${bdgCls(cD)}">${arrow(cD)} ${cD!==null?Math.abs(cD).toFixed(2)+'%p':'-'}</span>
+            <div class="dc-prev">직전 ${f(prev.cartRate)} · ${n(prev.cart)}건</div>
+          </div>
+          <div class="dc-metric">
+            <div class="dc-metric-label">💳 구매 전환율</div>
+            <div class="dc-metric-val" style="color:#a78bfa">${f(last.buyRate)}</div>
+            <div class="dc-metric-count">${n(last.buy)}건</div>
+            <span class="dc-delta-badge ${bdgCls(bD)}">${arrow(bD)} ${bD!==null?Math.abs(bD).toFixed(2)+'%p':'-'}</span>
+            <div class="dc-prev">직전 ${f(prev.buyRate)} · ${n(prev.buy)}건</div>
+          </div>
+        </div>
+      </div>`);
   });
+}
 
-  products.forEach(prod => {
-    const d262 = data['262Q'][prod] || [];
-    const d261 = data['261Q'][prod] || [];
+// ── Trend Charts ──────────────────────────────────────────────────────────────
+function renderTrendCharts(brand, data, prods) {
+  const grid = document.getElementById(`trend-${brand}`);
+  prods.forEach(prod => {
+    const d262 = data['262Q'][prod]||[], d261 = data['261Q'][prod]||[];
     if (!d262.length && !d261.length) return;
-
-    const id = `${brand}_chart_${prod.replace(/\s+/g,'_')}`;
-    grid.insertAdjacentHTML('beforeend', `
-      <div class="chart-card">
-        <div class="chart-title">${prod}</div>
+    const id = `${brand}_t_${prod.replace(/\s+/g,'_')}`;
+    grid.insertAdjacentHTML('beforeend',`
+      <div class="trend-card">
+        <div class="tc-title">${prod}</div>
         <div class="chart-wrap"><canvas id="${id}"></canvas></div>
       </div>`);
-
-    const labels = (d262.length >= d261.length ? d262 : d261).map(r=>r.date);
-    const pad = (arr, len) => { const a=[...arr]; while(a.length<len) a.push(null); return a; };
-
-    chartInstances[id] = new Chart(document.getElementById(id).getContext('2d'), {
-      type: 'line',
-      data: {
-        labels,
-        datasets: [
-          { label:'262Q 장바구니', data: pad(d262.map(r=>r.cartRate), labels.length), borderColor: Q262_COLOR.cart, backgroundColor: Q262_COLOR.cart+'22', borderWidth:2, pointRadius:4, tension:.3, fill:false },
-          { label:'262Q 구매',     data: pad(d262.map(r=>r.buyRate),  labels.length), borderColor: Q262_COLOR.buy,  backgroundColor:'transparent', borderWidth:2, pointRadius:4, tension:.3, fill:false },
-          { label:'261Q 장바구니', data: pad(d261.map(r=>r.cartRate), labels.length), borderColor: Q261_COLOR.cart, backgroundColor:'transparent', borderWidth:2, borderDash:[5,4], pointRadius:3, tension:.3, fill:false },
-          { label:'261Q 구매',     data: pad(d261.map(r=>r.buyRate),  labels.length), borderColor: Q261_COLOR.buy,  backgroundColor:'transparent', borderWidth:2, borderDash:[5,4], pointRadius:3, tension:.3, fill:false },
-        ]
-      },
-      options: {
-        responsive:true, maintainAspectRatio:false,
-        plugins: {
-          legend:{ labels:{ color:'#888', font:{size:11}, boxWidth:14, padding:10 } },
-          tooltip:{ callbacks:{ label: c => `${c.dataset.label}: ${c.parsed.y!==null ? c.parsed.y.toFixed(2)+'%' : '-'}` } }
+    const labels = (d262.length>=d261.length?d262:d261).map(r=>r.date);
+    const pad = (arr,len) => { const a=[...arr]; while(a.length<len) a.push(null); return a; };
+    charts[id] = new Chart(document.getElementById(id),{
+      type:'line',
+      data:{ labels, datasets:[
+        {label:'262Q 장바구니',data:pad(d262.map(r=>r.cartRate),labels.length),borderColor:C262.cart,backgroundColor:C262.cart+'18',borderWidth:2,pointRadius:3,tension:.35,fill:true},
+        {label:'262Q 구매',    data:pad(d262.map(r=>r.buyRate), labels.length),borderColor:C262.buy, backgroundColor:'transparent',borderWidth:2,pointRadius:3,tension:.35,fill:false},
+        {label:'261Q 장바구니',data:pad(d261.map(r=>r.cartRate),labels.length),borderColor:C261.cart,backgroundColor:'transparent',borderWidth:1.5,borderDash:[4,4],pointRadius:2,tension:.35,fill:false},
+        {label:'261Q 구매',    data:pad(d261.map(r=>r.buyRate), labels.length),borderColor:C261.buy, backgroundColor:'transparent',borderWidth:1.5,borderDash:[4,4],pointRadius:2,tension:.35,fill:false},
+      ]},
+      options:{
+        responsive:true,maintainAspectRatio:false,
+        interaction:{mode:'index',intersect:false},
+        plugins:{
+          legend:{labels:{color:'#666',font:{size:10},boxWidth:12,padding:8}},
+          tooltip:{callbacks:{label:c=>`${c.dataset.label}: ${c.parsed.y!==null?c.parsed.y.toFixed(2)+'%':'-'}`}}
         },
-        scales: {
-          x:{ ticks:{color:'#666',font:{size:10}}, grid:{color:'#1a1a24'} },
-          y:{ ticks:{color:'#666',font:{size:10},callback:v=>v+'%'}, grid:{color:'#1a1a24'} }
+        scales:{
+          x:{ticks:{color:'#555',font:{size:10}},grid:{color:'#161620'}},
+          y:{ticks:{color:'#555',font:{size:10},callback:v=>v+'%'},grid:{color:'#161620'}}
         }
       }
     });
   });
 }
 
-function renderDeltaTable(brand, data, products) {
-  const tbody = document.getElementById(`delta-${brand}`);
-  tbody.innerHTML = '';
-  products.forEach(prod => {
-    const rows = data['262Q'][prod] || [];
-    if (rows.length < 2) return;
-    const last = rows[rows.length-1], prev = rows[rows.length-2];
-    const cD = delta(last.cartRate, prev.cartRate);
-    const bD = delta(last.buyRate, prev.buyRate);
-    tbody.insertAdjacentHTML('beforeend', `<tr>
-      <td class="td-product">${prod}</td>
-      <td>${last.date}</td><td style="color:#555">${prev.date}</td>
-      <td style="color:#888">${fmtNum(last.inflow)}</td>
-      <td>${fmtNum(last.cart)}</td>
-      <td>${fmt(last.cartRate)}</td><td style="color:#555">${fmt(prev.cartRate)}</td>
-      <td class="${dcls(cD)}">${fmtArr(cD)}</td>
-      <td>${fmtNum(last.buy)}</td>
-      <td>${fmt(last.buyRate)}</td><td style="color:#555">${fmt(prev.buyRate)}</td>
-      <td class="${dcls(bD)}">${fmtArr(bD)}</td>
-    </tr>`);
-  });
-}
-
-function renderCmpTable(brand, data, products) {
-  const tbody = document.getElementById(`cmp-${brand}`);
-  const barsEl = document.getElementById(`bars-${brand}`);
-  tbody.innerHTML = '';
-  barsEl.innerHTML = '';
-
-  products.forEach(prod => {
-    const d262 = data['262Q'][prod] || [];
-    const d261 = data['261Q'][prod] || [];
+// ── Compare Charts (grouped bar) ─────────────────────────────────────────────
+function renderCmpCharts(brand, data, prods) {
+  const grid = document.getElementById(`cmp-${brand}`);
+  prods.forEach(prod => {
+    const d262 = data['262Q'][prod]||[], d261 = data['261Q'][prod]||[];
     const n = Math.min(d262.length, d261.length);
     if (!n) return;
 
-    // bar card
-    const maxC = Math.max(...d262.map(r=>r.cartRate||0), ...d261.map(r=>r.cartRate||0), 1);
-    const maxB = Math.max(...d262.map(r=>r.buyRate||0),  ...d261.map(r=>r.buyRate||0),  1);
-    let barRows = '';
-    for (let i=0; i<n; i++) {
-      const r2=d262[i], r1=d261[i];
-      barRows += `<div class="bar-wrap">
-        <div class="bar-label"><span>${r2.date} <span style="color:#f97316;font-size:10px">(261Q: ${r1.date})</span></span><span>🛒 ${fmt(r2.cartRate)} vs ${fmt(r1.cartRate)}</span></div>
-        <div class="bar-track"><div class="bar-fill" style="width:${pct(r2.cartRate,maxC)}%;background:#6366f1"></div></div>
-        <div class="bar-track" style="margin-top:2px"><div class="bar-fill" style="width:${pct(r1.cartRate,maxC)}%;background:#f97316"></div></div>
-        <div class="bar-label" style="margin-top:4px"><span></span><span>💳 ${fmt(r2.buyRate)} vs ${fmt(r1.buyRate)}</span></div>
-        <div class="bar-track"><div class="bar-fill" style="width:${pct(r2.buyRate,maxB)}%;background:#a78bfa"></div></div>
-        <div class="bar-track" style="margin-top:2px"><div class="bar-fill" style="width:${pct(r1.buyRate,maxB)}%;background:#fb923c"></div></div>
-      </div>`;
-    }
-    barsEl.insertAdjacentHTML('beforeend', `<div class="chart-card"><div class="chart-title" style="margin-bottom:14px">${prod}</div>${barRows}</div>`);
+    // Two canvases per product: 장바구니 & 구매
+    const idC = `${brand}_cc_${prod.replace(/\s+/g,'_')}`;
+    const idB = `${brand}_cb_${prod.replace(/\s+/g,'_')}`;
+    const labels = d262.slice(0,n).map(r=>r.date);
 
-    // table rows
-    for (let i=0; i<n; i++) {
-      const r2=d262[i], r1=d261[i];
-      const cD=delta(r2.cartRate,r1.cartRate), bD=delta(r2.buyRate,r1.buyRate);
-      tbody.insertAdjacentHTML('beforeend', `<tr>
-        <td class="td-product">${prod}</td>
-        <td style="color:#555">${i+1}일차</td>
-        <td>${r2.date}</td><td style="color:#f97316">${r1.date}</td>
-        <td>${fmtNum(r2.cart)}</td><td>${fmt(r2.cartRate)}</td>
-        <td style="color:#f97316">${fmtNum(r1.cart)}</td><td style="color:#f97316">${fmt(r1.cartRate)}</td>
-        <td class="${dcls(cD)}">${fmtArr(cD)}</td>
-        <td>${fmtNum(r2.buy)}</td><td>${fmt(r2.buyRate)}</td>
-        <td style="color:#f97316">${fmtNum(r1.buy)}</td><td style="color:#f97316">${fmt(r1.buyRate)}</td>
-        <td class="${dcls(bD)}">${fmtArr(bD)}</td>
-      </tr>`);
-    }
+    grid.insertAdjacentHTML('beforeend',`
+      <div class="cmp-card">
+        <div class="cc-title">${prod}</div>
+        <div class="cc-sub">🟣 262Q &nbsp; 🟠 261Q</div>
+        <div class="cmp-chart-wrap"><canvas id="${idC}"></canvas></div>
+      </div>
+      <div class="cmp-card" style="border-top:none;border-radius:0 0 14px 14px;margin-top:-14px;padding-top:4px">
+        <div class="cc-sub" style="margin-bottom:8px">💳 구매 전환율</div>
+        <div class="cmp-chart-wrap"><canvas id="${idB}"></canvas></div>
+      </div>`);
+
+    const mkBar = (id, label, data262vals, data261vals, color262, color261) => {
+      charts[id] = new Chart(document.getElementById(id),{
+        type:'bar',
+        data:{labels, datasets:[
+          {label:'262Q',data:data262vals,backgroundColor:color262+'cc',borderRadius:4,barPercentage:.7},
+          {label:'261Q',data:data261vals,backgroundColor:color261+'88',borderRadius:4,barPercentage:.7},
+        ]},
+        options:{
+          responsive:true,maintainAspectRatio:false,
+          interaction:{mode:'index',intersect:false},
+          plugins:{
+            legend:{labels:{color:'#666',font:{size:10},boxWidth:10,padding:8}},
+            tooltip:{callbacks:{label:c=>`${c.dataset.label}: ${c.parsed.y!==null?c.parsed.y.toFixed(2)+'%':'-'}`}}
+          },
+          scales:{
+            x:{ticks:{color:'#555',font:{size:10}},grid:{display:false}},
+            y:{ticks:{color:'#555',font:{size:10},callback:v=>v+'%'},grid:{color:'#161620'}}
+          }
+        }
+      });
+    };
+
+    mkBar(idC,'장바구니', d262.slice(0,n).map(r=>r.cartRate), d261.slice(0,n).map(r=>r.cartRate), C262.cart, C261.cart);
+    mkBar(idB,'구매',     d262.slice(0,n).map(r=>r.buyRate),  d261.slice(0,n).map(r=>r.buyRate),  C262.buy,  C261.buy);
   });
 }
 
 // ── Inner tab switch ──────────────────────────────────────────────────────────
 function switchInner(brand, tab, btn) {
-  ['trend','delta','compare'].forEach(t => {
-    document.getElementById(`inner-${brand}-${t}`).style.display = t===tab ? '' : 'none';
+  ['snapshot','delta','trend','compare'].forEach(t=>{
+    const el=document.getElementById(`inner-${brand}-${t}`);
+    if(el) el.style.display=t===tab?'':'none';
   });
-  document.querySelectorAll(`#innertabs-${brand} .inner-tab`).forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll(`#itabs-${brand} .inner-tab`).forEach(b=>b.classList.remove('active'));
   btn.classList.add('active');
 }
 
-// ── UI helpers ────────────────────────────────────────────────────────────────
-function showLoading(brand) {
-  document.getElementById(`loading-${brand}`).style.display = 'flex';
-  document.getElementById(`error-${brand}`).style.display = 'none';
-  document.getElementById(`app-${brand}`).style.display = 'none';
-}
-function showError(brand, msg) {
-  document.getElementById(`loading-${brand}`).style.display = 'none';
-  const el = document.getElementById(`error-${brand}`);
-  el.innerHTML = msg; el.style.display = '';
+// ── Panel states ──────────────────────────────────────────────────────────────
+function setPanelState(brand, state, msg='') {
+  const panel = document.getElementById(`panel-${brand}`);
+  if (state==='loading') panel.innerHTML=`<div class="loading-state"><div class="spin"></div>데이터 로딩 중...</div>`;
+  else if (state==='error') panel.innerHTML=`<div class="error-state">${msg}</div>`;
 }
 
-// ── Formatters ────────────────────────────────────────────────────────────────
-function delta(a, b) { return (a!==null && b!==null && a!==undefined && b!==undefined) ? a-b : null; }
-function fmt(v) { return v!==null && v!==undefined ? v.toFixed(2)+'%' : '-'; }
-function fmtD(d) { if(d===null) return ''; return (d>0?'+':'')+d.toFixed(2)+'%p'; }
-function fmtArr(d) { if(d===null) return '-'; return (d>0?'▲':(d<0?'▼':'—'))+' '+Math.abs(d).toFixed(2)+'%p'; }
-function dcls(d) { if(d===null) return 'td-neu'; return d>0?'td-pos':(d<0?'td-neg':'td-neu'); }
-function pct(v, max) { return max>0 ? ((v||0)/max*100).toFixed(1) : 0; }
+// ── Helpers ───────────────────────────────────────────────────────────────────
+const pad2 = v => String(v).padStart(2,'0');
+const dlt  = (a,b) => (a!=null&&b!=null) ? a-b : null;
+const f    = v => v!=null ? v.toFixed(2)+'%' : '-';
+const n    = v => v!=null ? Math.round(v).toLocaleString() : '-';
+const fD   = d => d===null?'':(d>0?'+':'')+d.toFixed(2)+'%p';
+const arrow= d => d===null?'—':(d>0?'▲':(d<0?'▼':'—'));
+const dcls = d => d===null?'delta-neu':(d>0?'delta-pos':(d<0?'delta-neg':'delta-neu'));
+const bdgCls=d => d===null?'badge-neu':(d>0?'badge-pos':(d<0?'badge-neg':'badge-neu'));
 
 // ── Init ──────────────────────────────────────────────────────────────────────
-window.addEventListener('DOMContentLoaded', () => {
-  BRANDS.forEach(b => {
-    document.getElementById(`url-input-${b}`).value = getUrl(b);
+window.addEventListener('DOMContentLoaded',()=>{
+  BRANDS.forEach(b=>{
+    document.getElementById(`url-input-${b}`).value=getUrl(b);
+    setPanelState(b,'loading');
   });
-  // Load current brand
   loadBrand('BOH');
-  // Auto-refresh every 5 min
-  setInterval(() => BRANDS.filter(b=>brandData[b]).forEach(b=>loadBrand(b, true)), 5*60*1000);
+  setInterval(()=>BRANDS.filter(b=>brandData[b]).forEach(b=>loadBrand(b,true)), 5*60*1000);
 });
 </script>
 </body>
