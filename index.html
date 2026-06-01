@@ -450,7 +450,8 @@ function renderSummaryTab(brand, data, prods) {
   if(charts[id]) charts[id].destroy();
   charts[id] = new Chart(document.getElementById(`btrend-${brand}`),{
     data:{ labels, datasets:[
-      {type:'bar',label:'262Q 유입',data:ser262.map(r=>r.inflow),backgroundColor:'#cbd5e188',yAxisID:'cnt',borderRadius:3,order:3},
+      {type:'bar',label:'262Q 유입',data:ser262.map(r=>r.inflow),backgroundColor:'#94a3b8aa',yAxisID:'cnt',borderRadius:3,order:3},
+      {type:'bar',label:'261Q 유입',data:pad(ser261.map(r=>r.inflow),labels.length),backgroundColor:'#fdba7488',yAxisID:'cnt',borderRadius:3,order:3},
       {type:'line',label:'262Q 장바구니율',data:ser262.map(r=>r.cartRate),borderColor:C262.cart,borderWidth:2.5,pointRadius:3,tension:.35,yAxisID:'rate',order:1},
       {type:'line',label:'262Q 구매율',data:ser262.map(r=>r.buyRate),borderColor:C262.buy,borderWidth:2.5,pointRadius:3,tension:.35,yAxisID:'rate',order:1},
       {type:'line',label:'261Q 장바구니율',data:pad(ser261.map(r=>r.cartRate),labels.length),borderColor:C261.cart,borderWidth:1.5,borderDash:[4,4],pointRadius:2,tension:.35,yAxisID:'rate',order:2},
