@@ -317,33 +317,50 @@ function buildPanelHTML(brand) {
 }
 
 // ── Funnel Cards ──────────────────────────────────────────────────────────────
+function aggregate(rows) {
+  const totInflow = rows.reduce((s,r)=>s+(r.inflow||0),0);
+  const totCart   = rows.reduce((s,r)=>s+(r.cart||0),0);
+  const totBuy    = rows.reduce((s,r)=>s+(r.buy||0),0);
+  const cartRate  = totInflow>0 ? totCart/totInflow*100 : null;
+  const buyRate   = totCart>0   ? totBuy/totCart*100    : null;
+  return {inflow:totInflow, cart:totCart, buy:totBuy, cartRate, buyRate};
+}
+
 function renderFunnelCards(brand, data, prods) {
   const grid = document.getElementById(`funnel-${brand}`);
   prods.forEach(prod => {
-    const rows = data['262Q'][prod] || [];
-    if (!rows.length) return;
-    const last = rows[rows.length-1];
-    const prev = rows.length>=2 ? rows[rows.length-2] : null;
-    const inflow = last.inflow || 1;
-    const cartW = Math.min(100, (last.cart||0)/inflow*100);
-    const buyW  = Math.min(100, (last.buy||0)/inflow*100);
-    const cD = dlt(last.cartRate, prev?.cartRate);
-    const bD = dlt(last.buyRate,  prev?.buyRate);
+    const rows262 = data['262Q'][prod] || [];
+    const rows261 = data['261Q'][prod] || [];
+    if (!rows262.length) return;
+
+    const agg262 = aggregate(rows262);
+    const agg261 = rows261.length ? aggregate(rows261.slice(0, rows262.length)) : null;
+
+    const dateRange = rows262.length===1
+      ? rows262[0].date
+      : `${rows262[0].date} ~ ${rows262[rows262.length-1].date}`;
+
+    const inflow = agg262.inflow || 1;
+    const cartW  = Math.min(100, agg262.cart/inflow*100);
+    const buyW   = Math.min(100, agg262.buy/inflow*100);
+    const cD = dlt(agg262.cartRate, agg261?.cartRate);
+    const bD = dlt(agg262.buyRate,  agg261?.buyRate);
+    const cmpLabel = agg261 ? `vs 261Q ${rows262.length}일` : '';
 
     grid.insertAdjacentHTML('beforeend',`
       <div class="funnel-card">
         <div class="fc-header">
           <div>
             <div class="fc-name">${prod}</div>
-            <div class="fc-date">${last.date}</div>
+            <div class="fc-date">${dateRange} · ${rows262.length}일 누적</div>
           </div>
-          <div class="fc-inflow" style="text-align:right">유입<br><span style="font-size:15px;font-weight:700;color:#888">${n(last.inflow)}</span></div>
+          <div class="fc-inflow" style="text-align:right">총 유입<br><span style="font-size:15px;font-weight:700;color:#888">${n(agg262.inflow)}</span></div>
         </div>
         <div class="funnel-stages">
           <div class="stage">
             <div class="stage-label" style="color:#94a3b8">유입</div>
             <div class="stage-bar-wrap">
-              <div class="stage-bar bar-inflow" style="width:100%" data-count="${n(last.inflow)}"></div>
+              <div class="stage-bar bar-inflow" style="width:100%" data-count="${n(agg262.inflow)}"></div>
             </div>
             <div class="stage-right">
               <div class="stage-rate" style="color:#94a3b8">100%</div>
@@ -352,24 +369,29 @@ function renderFunnelCards(brand, data, prods) {
           <div class="stage">
             <div class="stage-label" style="color:#818cf8">장바구니</div>
             <div class="stage-bar-wrap">
-              <div class="stage-bar bar-cart" style="width:${cartW.toFixed(1)}%" data-count="${n(last.cart)}"></div>
+              <div class="stage-bar bar-cart" style="width:${cartW.toFixed(1)}%" data-count="${n(agg262.cart)}"></div>
             </div>
             <div class="stage-right">
-              <div class="stage-rate" style="color:#818cf8">${f(last.cartRate)}</div>
-              <div class="stage-delta ${dcls(cD)}">${fD(cD)}</div>
+              <div class="stage-rate" style="color:#818cf8">${f(agg262.cartRate)}</div>
+              <div class="stage-delta ${dcls(cD)}" title="${cmpLabel}">${fD(cD)}</div>
             </div>
           </div>
           <div class="stage">
             <div class="stage-label" style="color:#a78bfa">구매</div>
             <div class="stage-bar-wrap">
-              <div class="stage-bar bar-buy" style="width:${buyW.toFixed(1)}%" data-count="${n(last.buy)}"></div>
+              <div class="stage-bar bar-buy" style="width:${buyW.toFixed(1)}%" data-count="${n(agg262.buy)}"></div>
             </div>
             <div class="stage-right">
-              <div class="stage-rate" style="color:#a78bfa">${f(last.buyRate)}</div>
-              <div class="stage-delta ${dcls(bD)}">${fD(bD)}</div>
+              <div class="stage-rate" style="color:#a78bfa">${f(agg262.buyRate)}</div>
+              <div class="stage-delta ${dcls(bD)}" title="${cmpLabel}">${fD(bD)}</div>
             </div>
           </div>
         </div>
+        ${agg261?`<div style="margin-top:10px;padding-top:10px;border-top:1px solid #1e1e2e;display:flex;gap:16px;font-size:11px;color:#555">
+          <span>261Q 동기간</span>
+          <span style="color:#666">🛒 ${f(agg261.cartRate)} · ${n(agg261.cart)}건</span>
+          <span style="color:#666">💳 ${f(agg261.buyRate)} · ${n(agg261.buy)}건</span>
+        </div>`:''}
       </div>`);
   });
 }
